@@ -1,30 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
+import { fetchData } from './data'
+
 function App() {
-	const [count, setCount] = useState(0)
+	const [query, setQuery] = useState('')
+	const [input, setInput] = useState('karate kid')
+	const [checkbox, setCheckbox] = useState(false)
+	const [movies, setMovies] = useState([])
+
+	const getData = async (query) => {
+		setQuery(query)
+		const data = await fetchData(query)
+		setMovies([data.results])
+	}
+
+	useEffect(() => {
+		setQuery(input)
+		getData(query)
+	}, [])
+
+	useEffect(() => {
+		if (movies.length >= 1) {
+			const moviesArr = movies[0]
+			moviesArr.forEach((movie) => {
+				console.log(movie)
+			})
+		}
+	}, [movies])
 
 	return (
-		<>
-			<div>
-				<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank" rel="noreferrer">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-		</>
+		<div className="App">
+			<form action="" onSubmit={(e) => e.preventDefault()}>
+				Only series :{' '}
+				<input
+					type="checkbox"
+					name=""
+					id=""
+					value={checkbox}
+					onClick={() => setCheckbox((prev) => !prev)}
+				/>
+				<input
+					type="text"
+					value={input}
+					onChange={(e) => setInput(e.target.value)}
+					className="border-solid border border-black"
+				/>
+				<button
+					type="submit"
+					className="bg-gray-700 text-white rounded-md px-6 py-2 transition duration-[250ms] hover:bg-gray-600"
+					onClick={() => getData(input)}>
+					Search
+				</button>
+			</form>
+
+			{movies.length >= 1 &&
+				movies[0].map((movie, index) => <p key={index}>{movie.original_title} </p>)}
+		</div>
 	)
 }
 
