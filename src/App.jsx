@@ -1,5 +1,5 @@
 // importing Hooks
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import './App.css'
 
 // importing Context API
@@ -11,8 +11,6 @@ import { Routes, Route } from 'react-router-dom'
 
 function App() {
 	const { movies, query } = useContext(MoviesContext)
-
-	console.log(movies)
 
 	return (
 		<div className="App bg-[#171717] min-h-screen">
