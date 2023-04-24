@@ -12,6 +12,6 @@ export const fetchData = async (query) => {
 		},
 	})
 
-	const data = await response.data
+	const data = await response.data.results
 	return data
 }

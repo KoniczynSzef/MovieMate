@@ -1,49 +1,20 @@
-import { useState, useId } from 'react'
+// importing Hooks
+import { useContext } from 'react'
 import './App.css'
 
-// imported function from index.js
+// importing Context API
+import MoviesContext from './data/MoviesContext'
+
+// importing components
 import Navbar from './components/Navbar'
-
-import { fetchData } from './data'
-
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
-	const inputId = useId()
-
-	const [query, setQuery] = useState('')
-	const [input, setInput] = useState('')
-	const [movies, setMovies] = useState([])
-
-	const getData = async (query) => {
-		if (query === '') {
-			setQuery('')
-			setMovies([])
-		} else {
-			setQuery(query)
-			const data = await fetchData(query)
-			setMovies([data.results])
-		}
-	}
+	const { movies, query } = useContext(MoviesContext)
 
 	return (
 		<div className="App">
 			<Navbar />
-			<form action="" onSubmit={(e) => e.preventDefault()}>
-				<input
-					type="text"
-					id={inputId}
-					value={input}
-					onChange={(e) => setInput(e.target.value)}
-					className="border-solid border border-black"
-				/>
-				<button
-					type="submit"
-					className="bg-gray-700 text-white rounded-md px-6 py-2 transition duration-[250ms] hover:bg-gray-600"
-					onClick={() => getData(input)}>
-					Search
-				</button>
-			</form>
 
 			{movies.length >= 1 && (
 				<div>
