@@ -1,5 +1,5 @@
 // importing Hooks
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import './App.css'
 
 // importing Context API
@@ -12,13 +12,17 @@ import { Routes, Route } from 'react-router-dom'
 function App() {
 	const { movies, query } = useContext(MoviesContext)
 
+	console.log(movies)
+
 	return (
-		<div className="App">
+		<div className="App bg-[#171717] min-h-screen">
 			<Navbar />
 
-			{movies.length >= 1 && (
-				<div>
-					<h1>Search results for : {query} </h1>
+			{movies.length > 1 && (
+				<div className="mt-24">
+					<h1 className="text-center text-4xl text-white">
+						Search results for : <span className="capitalize">{query}</span>
+					</h1>
 					{movies[0].map((movie, index) => (
 						<div key={index}>
 							<p>{movie.original_title} </p>

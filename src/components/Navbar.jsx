@@ -1,6 +1,6 @@
 import { useContext, useId, useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../public/vite.svg'
+import logo from '../assets/vite.svg'
 import { LINKS } from '../data/assets'
 import './Navbar.css'
 
@@ -23,17 +23,17 @@ const Navbar = () => {
 	return (
 		<div className="bg-[#070707]">
 			<header className="container relative mx-auto py-6 flex items-center justify-between px-2">
-				<Link to={'/'} className="logo transition duration-200" title="MovieMate">
+				<Link to={'/'} className="logo transition duration-200 ml-2" title="MovieMate">
 					<img src={logo} alt="" />
 				</Link>
 
 				<nav>
-					<ul className="flex gap-4 items-center">
+					<ul className="flex gap-2 lg:gap-4 items-center">
 						{LINKS.map((link, idx) => (
-							<li key={idx}>
+							<li key={idx} className="hidden md:block">
 								<Link
 									to={`/${link}`}
-									className="px-5 py-2 rounded-sm hover:bg-[#272727] text-white text-lg md:text-xl capitalize font-semibold transition duration-300">
+									className="px-5 py-2 rounded-sm hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300">
 									{link}
 								</Link>
 							</li>
