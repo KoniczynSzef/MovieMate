@@ -1,0 +1,7 @@
+.logo img {
+	transition: 250ms all ease-in-out;
+}
+
+.logo:hover > img {
+	filter: drop-shadow(0px 0px 20px dodgerblue);
+}

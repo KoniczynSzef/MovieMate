@@ -1,7 +1,12 @@
 import { useState, useId } from 'react'
 import './App.css'
 
+// imported function from index.js
+import Navbar from './components/Navbar'
+
 import { fetchData } from './data'
+
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
 	const inputId = useId()
@@ -23,6 +28,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<Navbar />
 			<form action="" onSubmit={(e) => e.preventDefault()}>
 				<input
 					type="text"
@@ -53,6 +59,11 @@ function App() {
 					))}
 				</div>
 			)}
+
+			{/* Tutaj będzie react routing -> wybór strony movies.jsx itp */}
+			<Routes>
+				<Route></Route>
+			</Routes>
 		</div>
 	)
 }
