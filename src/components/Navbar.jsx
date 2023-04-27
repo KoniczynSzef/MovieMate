@@ -1,4 +1,7 @@
 import { useContext, useId, useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+
 import { Link } from 'react-router-dom';
 import logo from '../assets/vite.svg';
 import { LINKS } from '../data/assets';
@@ -8,6 +11,8 @@ import { fetchData } from '../data';
 import MoviesContext from '../data/MoviesContext';
 
 const Navbar = () => {
+	const navigate = useNavigate();
+
 	const inputId = useId();
 	const [input, setInput] = useState('');
 
@@ -25,7 +30,13 @@ const Navbar = () => {
 	return (
 		<div className="bg-[#070707]">
 			<header className="container relative mx-auto py-6 flex items-center justify-between px-2">
-				<Link to={'/'} className="logo transition duration-200 ml-2" title="MovieMate">
+				<Link
+					to={'/'}
+					className="logo transition duration-200 ml-2"
+					title="MovieMate"
+					onClick={() => {
+						navigate('/');
+					}}>
 					<img src={logo} alt="" />
 				</Link>
 
@@ -45,6 +56,7 @@ const Navbar = () => {
 							className="flex"
 							onSubmit={(e) => {
 								e.preventDefault();
+								navigate('/search');
 								getData(input);
 							}}>
 							<input
