@@ -16,38 +16,12 @@ export const fetchData = async (query) => {
 	return data;
 };
 
-export const fetchGenre = async (genre) => {
+export const fetchGenre = async (genreID) => {
 	const response = await fetch(
 		`https://api.themoviedb.org/3/discover/movie?api_key=${
 			import.meta.env.VITE_KEY
-		}&language=en-us&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genre}&time=${new Date()}`,
+		}&language=en-us&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${genreID}&time=${new Date()}`,
 	);
 	const data = await response.json();
 	return data.results;
 };
-
-// export const fetchGenre = async (genre) => {
-// 	try {
-// 		const response = await axios.request({
-// 			url: `https://api.themoviedb.org/3/discover/movie?api_key=${
-// 				import.meta.env.VITE_KEY
-// 			}&with_genres=${genre}`,
-
-// 			params: {
-// 				query: genre,
-// 			},
-// 		})
-
-// 		const data = response.data.results
-// 		return data
-
-// 		// const allGenres = response.data.results
-// 		// const data = allGenres.find((genre) => genre.name.toLowerCase() === genre.toLowerCase())
-
-// 		// if (!data) {
-// 		// 	return `No genre founded`
-// 		// }
-// 	} catch (error) {
-// 		console.error(error)
-// 	}
-// }

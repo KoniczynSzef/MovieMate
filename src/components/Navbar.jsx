@@ -1,26 +1,26 @@
-import { useContext, useId, useState } from 'react'
-import { Link } from 'react-router-dom'
-import logo from '../assets/vite.svg'
-import { LINKS } from '../data/assets'
-import './Navbar.css'
+import { useContext, useId, useState } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../assets/vite.svg';
+import { LINKS } from '../data/assets';
+import './Navbar.css';
 
-import { fetchData } from '../data'
-import MoviesContext from '../data/MoviesContext'
+import { fetchData } from '../data';
+import MoviesContext from '../data/MoviesContext';
 
 const Navbar = () => {
-	const inputId = useId()
-	const [input, setInput] = useState('')
+	const inputId = useId();
+	const [input, setInput] = useState('');
 
-	const { movies, setMovies, setQuery } = useContext(MoviesContext)
+	const { movies, setMovies, setQuery } = useContext(MoviesContext);
 
 	const getData = async (query) => {
-		setQuery(query)
-		const fetchedMovies = await fetchData(query)
+		setQuery(query);
+		const fetchedMovies = await fetchData(query);
 
-		console.log(fetchedMovies.length)
-		setMovies([fetchedMovies])
-		console.log(movies)
-	}
+		console.log(fetchedMovies.length);
+		setMovies(fetchedMovies);
+		console.log(movies);
+	};
 
 	return (
 		<div className="bg-[#070707]">
@@ -44,8 +44,8 @@ const Navbar = () => {
 						<form
 							className="flex"
 							onSubmit={(e) => {
-								e.preventDefault()
-								getData(input)
+								e.preventDefault();
+								getData(input);
 							}}>
 							<input
 								type="search"
@@ -60,7 +60,7 @@ const Navbar = () => {
 				</nav>
 			</header>
 		</div>
-	)
-}
+	);
+};
 
-export default Navbar
+export default Navbar;
