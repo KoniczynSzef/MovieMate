@@ -16,15 +16,12 @@ const Navbar = () => {
 	const inputId = useId();
 	const [input, setInput] = useState('');
 
-	const { movies, setMovies, setQuery } = useContext(MoviesContext);
+	const { setMovies, setQuery } = useContext(MoviesContext);
 
 	const getData = async (query) => {
 		setQuery(query);
 		const fetchedMovies = await fetchData(query);
-
-		console.log(fetchedMovies.length);
 		setMovies(fetchedMovies);
-		console.log(movies);
 	};
 
 	return (

@@ -16,20 +16,21 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Series from './pages/Series';
 import Movies from './pages/Movies';
+import Movie from './pages/Movie';
 import MovieCharacters from './pages/MovieCharacters';
 import ForKids from './pages/ForKids';
 
 function App() {
-	const { movies, setMovies, query } = useContext(MoviesContext);
+	const { movies, setMovies, query, movie } = useContext(MoviesContext);
 
 	const [topMovies, setTopMovies] = useState([]);
 
-	useEffect(() => {
-		const getTopMovies = async () => {
-			const response = await fetchTopMovies();
-			setTopMovies(response);
-		};
+	const getTopMovies = async () => {
+		const response = await fetchTopMovies();
+		setTopMovies(response);
+	};
 
+	useEffect(() => {
 		getTopMovies();
 	}, []);
 
@@ -52,10 +53,11 @@ function App() {
 				<Route path="/" element={<Home movies={topMovies} />}></Route>
 				<Route path="/search" element={<Search movies={movies} query={query} />}></Route>
 
-				<Route path="/movies" element={<Movies />}></Route>
-				<Route path="/series" element={<Series />}></Route>
-				<Route path="/for kids" element={<ForKids />}></Route>
-				<Route path="/movie characters" element={<MovieCharacters />}></Route>
+				<Route path="/movies" element={<Movies />} />
+				<Route path="/series" element={<Series />} />
+				<Route path="/for kids" element={<ForKids />} />
+				<Route path="/movie characters" element={<MovieCharacters />} />
+				<Route path="/movies/:id" element={<Movie movie={movie} />} />
 			</Routes>
 		</div>
 	);
