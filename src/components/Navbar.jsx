@@ -10,6 +10,8 @@ import './Navbar.css';
 import { fetchData, fetchTopMovies } from '../data';
 import MoviesContext from '../data/MoviesContext';
 
+import { motion, AnimatePresence } from 'framer-motion';
+
 import '../App.css';
 
 const Navbar = () => {
@@ -28,6 +30,8 @@ const Navbar = () => {
 	};
 
 	const getTypeOfMovie = async (type) => {
+		setInput('');
+
 		if (type === 'movies') {
 			const data = await fetchTopMovies('movie');
 			setMovies(data);
@@ -69,13 +73,30 @@ const Navbar = () => {
 							onMouseLeave={() => setShowDropdown(false)}>
 							Select Genre :
 							{showDropdown && (
-								<ul name="" id="">
-									{GENRES.map((genre, index) => (
-										<li value="" key={index}>
-											<Link to={`/genre/${genre}`}>{genre}</Link>
-										</li>
-									))}
-								</ul>
+								<AnimatePresence>
+									<motion.ul
+										className="bg-red-500 flex flex-col gap-2"
+										key={'dropdown'}
+										initial={{ height: 0 }}
+										animate={{ height: 'auto' }}
+										transition={{ duration: 0.1 * GENRES.length }}>
+										{GENRES.map((genre, index) => (
+											<motion.li
+												className="w-full h-full flex"
+												value=""
+												key={index}
+												initial={{ opacity: 0 }}
+												animate={{ opacity: 1 }}
+												transition={{ duration: 0.25, delay: 0.1 * index }}>
+												<Link
+													to={`/genre/${genre}`}
+													className="w-full p-2 pl-4">
+													{genre}
+												</Link>
+											</motion.li>
+										))}
+									</motion.ul>
+								</AnimatePresence>
 							)}
 						</li>
 
