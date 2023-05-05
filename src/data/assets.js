@@ -1,4 +1,4 @@
-export const LINKS = ['Movies', 'Series', 'For Kids', 'Movie Characters'];
+export const LINKS = ['movies', 'series', 'for kids'];
 export const GENRE_NAMES = [
 	28, // akcja
 	16, // animacja
@@ -15,4 +15,22 @@ export const GENRE_NAMES = [
 	10770, // film TV
 	53, // thriller
 	10752, // wojenny
+];
+
+export const GENRES = [
+	'action',
+	'animation',
+	'comedy',
+	'drama',
+	'family',
+	'fantasy',
+	'history',
+	'horror',
+	'music',
+	'mystery',
+	'romance',
+	'sci-fi',
+	'TV movie',
+	'thriller',
+	'war',
 ];

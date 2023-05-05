@@ -4,24 +4,38 @@ import { useNavigate } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 import logo from '../assets/vite.svg';
-import { LINKS } from '../data/assets';
+import { GENRES, LINKS } from '../data/assets';
 import './Navbar.css';
 
-import { fetchData } from '../data';
+import { fetchData, fetchTopMovies } from '../data';
 import MoviesContext from '../data/MoviesContext';
 
+import '../App.css';
+
 const Navbar = () => {
+	const [showDropdown, setShowDropdown] = useState(false);
 	const navigate = useNavigate();
 
 	const inputId = useId();
 	const [input, setInput] = useState('');
 
-	const { setMovies, setQuery } = useContext(MoviesContext);
+	const { setMovies, setQuery, setPage } = useContext(MoviesContext);
 
 	const getData = async (query) => {
 		setQuery(query);
 		const fetchedMovies = await fetchData(query);
 		setMovies(fetchedMovies);
+	};
+
+	const getTypeOfMovie = async (type) => {
+		if (type === 'movies') {
+			const data = await fetchTopMovies('movie');
+			setMovies(data);
+			setPage(1);
+		} else if (type === 'series') {
+			const data = await fetchTopMovies('tv');
+			setMovies(data);
+		}
 	};
 
 	return (
@@ -42,12 +56,28 @@ const Navbar = () => {
 						{LINKS.map((link, idx) => (
 							<li key={idx} className="hidden md:block">
 								<Link
+									onClick={() => getTypeOfMovie(link)}
 									to={`/${link}`}
 									className="px-5 py-2 rounded-sm hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300">
 									{link}
 								</Link>
 							</li>
 						))}
+						<li
+							className="dropdown px-5 py-2 rounded-sm bg-inherit border-2 border-solid cursor-pointer border-[#272727] hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300"
+							onMouseEnter={() => setShowDropdown(true)}
+							onMouseLeave={() => setShowDropdown(false)}>
+							Select Genre :
+							{showDropdown && (
+								<ul name="" id="">
+									{GENRES.map((genre, index) => (
+										<li value="" key={index}>
+											<Link to={`/genre/${genre}`}>{genre}</Link>
+										</li>
+									))}
+								</ul>
+							)}
+						</li>
 
 						<form
 							className="flex"

@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Home = ({ movies }) => {
 	return (
 		movies.length >= 1 && (
-			<div className="mt-24 bg-red-50">
+			<div className="mt-24">
 				<h1 className="text-center text-4xl text-white">Current trending movies</h1>
 				{movies.map((movie, index) => (
 					<div key={index}>
@@ -17,6 +18,10 @@ const Home = ({ movies }) => {
 			</div>
 		)
 	);
+};
+
+Home.propTypes = {
+	movies: PropTypes.array.isRequired,
 };
 
 export default Home;

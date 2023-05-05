@@ -38,15 +38,28 @@ export const fetchGenre = async (genreID, index) => {
 	return data.results;
 };
 
-export const fetchTopMovies = async () => {
+export const fetchTrendingMovies = async () => {
 	const response = await axios.request({
-		url: `https://api.themoviedb.org/3/discover/movie?api_key=${
-			import.meta.env.VITE_KEY
-		}&sort_by=vote_average.desc`,
+		url: `https://api.themoviedb.org/3/trending/movie/day?api_key=${import.meta.env.VITE_KEY}`,
 	});
 
 	const data = await response.data;
-	const bestMovies = data.results.slice(0, 4);
+	return data.results.slice(0, 4);
+};
 
-	return bestMovies;
+export const fetchTopMovies = async (type, page) => {
+	const response = await axios.get(
+		`https://api.themoviedb.org/3/${type}/top_rated?api_key=${
+			import.meta.env.VITE_KEY
+		}&page=${page}`,
+	);
+
+	const data = await response.data.results;
+
+	for (let i = data.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[data[i], data[j]] = [data[j], data[i]];
+	}
+
+	return data;
 };

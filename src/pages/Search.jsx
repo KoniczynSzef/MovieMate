@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MoviesContext from '../data/MoviesContext';
 
 const Search = ({ movies, query }) => {
-	const { movie, setMovie } = useContext(MoviesContext);
-	console.log(movies);
+	const { setMovie } = useContext(MoviesContext);
 	return (
 		movies.length >= 1 && (
 			<div className="mt-24">
@@ -16,11 +15,7 @@ const Search = ({ movies, query }) => {
 				)}
 
 				{movies.map((movie, index) => (
-					<Link
-						key={index}
-						to={`/movies/${movie.id}`}
-						movieProp={movie}
-						onClick={() => setMovie(movie)}>
+					<Link key={index} to={`/movies/${movie.id}`} onClick={() => setMovie(movie)}>
 						<p>{movie.original_title} </p>
 						<img
 							src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

@@ -8,3 +8,27 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
+.dropdown {
+	position: relative;
+}
+
+.dropdown ul {
+	position: absolute;
+	background-color: #070707;
+	width: 100%;
+	top: 100%;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.dropdown ul li {
+	padding: 0.5rem;
+	padding-left: 1rem;
+}
+
+.dropdown ul li:hover {
+	background-color: #272727;
+}

@@ -6,7 +6,7 @@ import './App.css';
 import MoviesContext from './data/MoviesContext';
 
 // import fetchGenre function, which runs on app load
-import { fetchGenre, fetchTopMovies } from './data';
+import { fetchGenre, fetchTrendingMovies } from './data';
 import { GENRE_NAMES } from './data/assets';
 
 // importing components
@@ -17,8 +17,9 @@ import Home from './pages/Home';
 import Series from './pages/Series';
 import Movies from './pages/Movies';
 import Movie from './pages/Movie';
-import MovieCharacters from './pages/MovieCharacters';
+import Genres from './pages/Genres';
 import ForKids from './pages/ForKids';
+import NotFound from './pages/NotFound';
 
 function App() {
 	const { movies, setMovies, query, movie } = useContext(MoviesContext);
@@ -26,7 +27,7 @@ function App() {
 	const [topMovies, setTopMovies] = useState([]);
 
 	const getTopMovies = async () => {
-		const response = await fetchTopMovies();
+		const response = await fetchTrendingMovies();
 		setTopMovies(response);
 	};
 
@@ -53,11 +54,14 @@ function App() {
 				<Route path="/" element={<Home movies={topMovies} />}></Route>
 				<Route path="/search" element={<Search movies={movies} query={query} />}></Route>
 
-				<Route path="/movies" element={<Movies />} />
-				<Route path="/series" element={<Series />} />
+				<Route path="/movies" element={<Movies moviesArr={movies} />} />
+				<Route path="/series" element={<Series movies={movies} />} />
 				<Route path="/for kids" element={<ForKids />} />
-				<Route path="/movie characters" element={<MovieCharacters />} />
+				<Route path="/movie characters" element={<Genres />} />
 				<Route path="/movies/:id" element={<Movie movie={movie} />} />
+				<Route path="/series/:id" element={<Movie movie={movie} />} />
+
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</div>
 	);
