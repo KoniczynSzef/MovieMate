@@ -50,6 +50,7 @@ const Navbar = () => {
 					className="logo transition duration-200 ml-2"
 					title="MovieMate"
 					onClick={() => {
+						setInput('');
 						navigate('/');
 					}}>
 					<img src={logo} alt="" />
