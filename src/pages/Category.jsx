@@ -1,27 +1,29 @@
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import MoviesContext from '../data/MoviesContext';
-import { fetchTopMovies } from '../data';
 
-const Movies = ({ movies }) => {
-	const { setMovie, setMovies } = useContext(MoviesContext);
+import { fetchGenre } from '../data';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+const Category = () => {
+	const { setMovie, category } = useContext(MoviesContext);
+	console.log(category);
+	const [movies, setMovies] = useState([]);
 	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
 
 	useEffect(() => {
-		const getTopMovies = async (type) => {
-			const [data, pages] = await fetchTopMovies(type, page);
-			setTotalPages(pages);
+		const getGenre = async () => {
+			const [data, pages] = await fetchGenre(category, page);
 			setMovies(data);
+			setTotalPages(pages);
 		};
 
-		getTopMovies('movie');
-	}, [page, setMovies]);
+		getGenre();
+	}, [page, setMovies, category]);
 
 	return (
 		<div>
-			<h1>{page}</h1>
 			{movies.map((movie, index) => (
 				<Link key={index} to={`/movies/${movie.id}`} onClick={() => setMovie(movie)}>
 					<p>{movie.original_title} </p>
@@ -45,8 +47,8 @@ const Movies = ({ movies }) => {
 	);
 };
 
-Movies.propTypes = {
-	movies: PropTypes.array.isRequired,
+Category.propTypes = {
+	category: PropTypes.string,
 };
 
-export default Movies;
+export default Category;

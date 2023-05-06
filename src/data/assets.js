@@ -1,4 +1,4 @@
-export const LINKS = ['movies', 'series', 'for kids'];
+export const LINKS = ['movies', 'series', 'people'];
 export const GENRE_NAMES = [
 	28, // akcja
 	16, // animacja

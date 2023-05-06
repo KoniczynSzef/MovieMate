@@ -1,13 +1,9 @@
 // importing Hooks
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import './App.css';
 
 // importing Context API
 import MoviesContext from './data/MoviesContext';
-
-// import fetchGenre function, which runs on app load
-import { fetchGenre, fetchTrendingMovies } from './data';
-import { GENRE_NAMES } from './data/assets';
 
 // importing components
 import Navbar from './components/Navbar';
@@ -17,50 +13,29 @@ import Home from './pages/Home';
 import Series from './pages/Series';
 import Movies from './pages/Movies';
 import Movie from './pages/Movie';
-import Genres from './pages/Genres';
-import ForKids from './pages/ForKids';
 import NotFound from './pages/NotFound';
+import Category from './pages/Category';
+import People from './pages/People';
+import Person from './pages/Person';
 
 function App() {
-	const { movies, setMovies, query, movie } = useContext(MoviesContext);
-
-	const [topMovies, setTopMovies] = useState([]);
-
-	const getTopMovies = async () => {
-		const response = await fetchTrendingMovies();
-		setTopMovies(response);
-	};
-
-	useEffect(() => {
-		getTopMovies();
-	}, []);
-
-	useEffect(() => {
-		const arrayGENRE_length = GENRE_NAMES.length;
-		const randomNumberIndex = Math.floor(Math.random() * arrayGENRE_length);
-		const getGenre = async (genre, index) => {
-			const fetchedMovies = await fetchGenre(genre, index);
-			setMovies(fetchedMovies);
-		};
-		getGenre(GENRE_NAMES[randomNumberIndex], randomNumberIndex);
-	}, []);
+	const { movies, query, movie, category, person } = useContext(MoviesContext);
 
 	return (
 		<div className="App bg-[#171717] min-h-screen">
 			<Navbar />
 
-			{/* Tutaj będzie react routing -> wybór strony movies.jsx itp */}
 			<Routes>
-				<Route path="/" element={<Home movies={topMovies} />}></Route>
+				<Route path="/" element={<Home />}></Route>
 				<Route path="/search" element={<Search movies={movies} query={query} />}></Route>
-
-				<Route path="/movies" element={<Movies moviesArr={movies} />} />
+				<Route path="/movies" element={<Movies movies={movies} />} />
 				<Route path="/series" element={<Series movies={movies} />} />
-				<Route path="/for kids" element={<ForKids />} />
-				<Route path="/movie characters" element={<Genres />} />
+				<Route path="/people" element={<People />} />
+
 				<Route path="/movies/:id" element={<Movie movie={movie} />} />
 				<Route path="/series/:id" element={<Movie movie={movie} />} />
-
+				<Route path="/genre/:genre" element={<Category category={category} />} />
+				<Route path="/people/:id" element={<Person person={person} />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</div>

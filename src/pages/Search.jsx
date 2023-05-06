@@ -14,15 +14,22 @@ const Search = ({ movies, query }) => {
 					</h1>
 				)}
 
-				{movies.map((movie, index) => (
-					<Link key={index} to={`/movies/${movie.id}`} onClick={() => setMovie(movie)}>
-						<p>{movie.original_title} </p>
-						<img
-							src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-							alt="Not showing"
-						/>
-					</Link>
-				))}
+				{movies.map((movie, index) =>
+					movie.media_type === 'movie' || movie.media_type === 'tv' ? (
+						<Link
+							key={index}
+							to={`/movies/${movie.id}`}
+							onClick={() => setMovie(movie)}>
+							<p>{movie.original_title} </p>
+							<img
+								src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+								alt="Not showing"
+							/>
+						</Link>
+					) : (
+						<h1 key={index}>{movie.original_name}</h1>
+					),
+				)}
 			</div>
 		)
 	);

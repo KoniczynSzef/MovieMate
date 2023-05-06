@@ -1,26 +1,22 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import MoviesContext from '../data/MoviesContext';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { fetchTopMovies } from '../data';
 
-const Series = ({ movies }) => {
-	const { setMovie, setMovies, setPage, page } = useContext(MoviesContext);
+const Series = () => {
+	const { setMovie, setMovies, movies } = useContext(MoviesContext);
+	const [page, setPage] = useState(1);
+	const [totalPages, setTotalPages] = useState(0);
 
-	const getTopMovies = async (type, page) => {
-		const data = await fetchTopMovies(type, page);
-		setMovies(data);
-	};
+	useEffect(() => {
+		const getTopMovies = async (type) => {
+			const [data, pages] = await fetchTopMovies(type, page);
+			setTotalPages(pages);
+			setMovies(data);
+		};
 
-	const goToNextOrPrevPage = (direction) => {
-		if (direction === 'next') {
-			setPage((prev) => (prev += 1));
-		} else {
-			setPage((prev) => (prev -= 1));
-		}
-
-		getTopMovies('tv', page);
-	};
+		getTopMovies('tv');
+	}, [page, setMovies]);
 	return (
 		<div>
 			{movies.map((movie, index) => (
@@ -33,21 +29,17 @@ const Series = ({ movies }) => {
 				</Link>
 			))}
 			{page > 1 && (
-				<button onClick={() => goToNextOrPrevPage('prev')} className="bg-red-300 px-12">
+				<button onClick={() => setPage((prev) => (prev -= 1))} className="bg-red-300 px-12">
 					Prev Page
 				</button>
 			)}
-			{page < 1000 && (
-				<button onClick={() => goToNextOrPrevPage('next')} className="bg-red-300 px-12">
+			{page < totalPages && (
+				<button onClick={() => setPage((prev) => (prev += 1))} className="bg-red-300 px-12">
 					Next Page
 				</button>
 			)}
 		</div>
 	);
-};
-
-Series.propTypes = {
-	movies: PropTypes.array.isRequired,
 };
 
 export default Series;

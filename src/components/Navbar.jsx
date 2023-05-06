@@ -1,4 +1,4 @@
-import { useContext, useId, useState } from 'react';
+import { useContext, useId, useRef, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -19,23 +19,23 @@ const Navbar = () => {
 	const navigate = useNavigate();
 
 	const inputId = useId();
-	const [input, setInput] = useState('');
+	const input = useRef();
 
-	const { setMovies, setQuery, setPage } = useContext(MoviesContext);
+	const { setMovies, setQuery, setCategory } = useContext(MoviesContext);
 
-	const getData = async (query) => {
-		setQuery(query);
-		const fetchedMovies = await fetchData(query);
+	const getData = async () => {
+		const q = input.current.value;
+		setQuery(q);
+		const fetchedMovies = await fetchData(q);
 		setMovies(fetchedMovies);
 	};
 
 	const getTypeOfMovie = async (type) => {
-		setInput('');
+		input.current.value = '';
 
 		if (type === 'movies') {
 			const data = await fetchTopMovies('movie');
 			setMovies(data);
-			setPage(1);
 		} else if (type === 'series') {
 			const data = await fetchTopMovies('tv');
 			setMovies(data);
@@ -46,14 +46,15 @@ const Navbar = () => {
 		<div className="bg-[#070707]">
 			<header className="container relative mx-auto py-6 flex items-center justify-between px-2">
 				<Link
+					tabIndex={1}
 					to={'/'}
 					className="logo transition duration-200 ml-2"
 					title="MovieMate"
 					onClick={() => {
-						setInput('');
+						input.current.value = '';
 						navigate('/');
 					}}>
-					<img src={logo} alt="" />
+					<img src={logo} alt="" className="scale-125 md:scale-150" />
 				</Link>
 
 				<nav>
@@ -61,35 +62,44 @@ const Navbar = () => {
 						{LINKS.map((link, idx) => (
 							<li key={idx} className="hidden md:block">
 								<Link
+									tabIndex={idx + 2}
 									onClick={() => getTypeOfMovie(link)}
+									onFocus={() => setShowDropdown(false)}
 									to={`/${link}`}
 									className="px-5 py-2 rounded-sm hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300">
 									{link}
 								</Link>
 							</li>
 						))}
-						<li
+						<button
 							className="dropdown px-5 py-2 rounded-sm bg-inherit border-2 border-solid cursor-pointer border-[#272727] hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300"
 							onMouseEnter={() => setShowDropdown(true)}
-							onMouseLeave={() => setShowDropdown(false)}>
+							onMouseLeave={() => setShowDropdown(false)}
+							onFocus={() => setShowDropdown(true)}>
 							Select Genre :
 							{showDropdown && (
 								<AnimatePresence>
 									<motion.ul
-										className="bg-red-500 flex flex-col gap-2"
+										className="top-10 md:top-12 flex flex-col gap-2"
 										key={'dropdown'}
 										initial={{ height: 0 }}
 										animate={{ height: 'auto' }}
 										transition={{ duration: 0.1 * GENRES.length }}>
 										{GENRES.map((genre, index) => (
 											<motion.li
+												tabIndex={showDropdown && index + 6}
 												className="w-full h-full flex"
 												value=""
 												key={index}
-												initial={{ opacity: 0 }}
-												animate={{ opacity: 1 }}
+												initial={{
+													opacity: 0,
+													x: -100,
+													filter: 'blur(5px)',
+												}}
+												animate={{ opacity: 1, x: 0, filter: 'blur(0)' }}
 												transition={{ duration: 0.25, delay: 0.1 * index }}>
 												<Link
+													onClick={() => setCategory(genre)}
 													to={`/genre/${genre}`}
 													className="w-full p-2 pl-4">
 													{genre}
@@ -99,22 +109,22 @@ const Navbar = () => {
 									</motion.ul>
 								</AnimatePresence>
 							)}
-						</li>
+						</button>
 
 						<form
 							className="flex"
 							onSubmit={(e) => {
 								e.preventDefault();
 								navigate('/search');
-								getData(input);
+								getData();
 							}}>
 							<input
+								onFocus={() => setShowDropdown(false)}
 								type="search"
 								placeholder="Search on MovieMate..."
-								className="px-3 bg-transparent border border-solid border-gray-700 py-2 text-gray-200 rounded-md outline-none"
-								value={input}
+								className="px-3 border border-solid bg-[#070707] border-gray-700 py-2 text-gray-200 rounded-md outline-none"
 								id={inputId}
-								onChange={(e) => setInput(e.target.value)}
+								ref={input}
 							/>
 						</form>
 					</ul>
