@@ -78,36 +78,34 @@ const Navbar = () => {
 							onFocus={() => setShowDropdown(true)}>
 							Select Genre :
 							{showDropdown && (
-								<AnimatePresence>
-									<motion.ul
-										className="top-10 md:top-12 flex flex-col gap-2"
-										key={'dropdown'}
-										initial={{ height: 0 }}
-										animate={{ height: 'auto' }}
-										transition={{ duration: 0.1 * GENRES.length }}>
-										{GENRES.map((genre, index) => (
-											<motion.li
-												tabIndex={showDropdown && index + 6}
-												className="w-full h-full flex"
-												value=""
-												key={index}
-												initial={{
-													opacity: 0,
-													x: -100,
-													filter: 'blur(5px)',
-												}}
-												animate={{ opacity: 1, x: 0, filter: 'blur(0)' }}
-												transition={{ duration: 0.25, delay: 0.1 * index }}>
-												<Link
-													onClick={() => setCategory(genre)}
-													to={`/genre/${genre}`}
-													className="w-full p-2 text-center">
-													{genre}
-												</Link>
-											</motion.li>
-										))}
-									</motion.ul>
-								</AnimatePresence>
+								<motion.ul
+									className="top-10 md:top-12 flex flex-col gap-2 z-50"
+									key={'dropdown'}
+									initial={{ height: 0 }}
+									animate={{ height: 'auto' }}
+									transition={{ duration: 0.1 * GENRES.length }}>
+									{GENRES.map((genre, index) => (
+										<motion.li
+											tabIndex={showDropdown && index + 6}
+											className="w-full h-full flex"
+											value=""
+											key={index}
+											initial={{
+												opacity: 0,
+												x: -100,
+												filter: 'blur(5px)',
+											}}
+											animate={{ opacity: 1, x: 0, filter: 'blur(0)' }}
+											transition={{ duration: 0.25, delay: 0.1 * index }}>
+											<Link
+												onClick={() => setCategory(genre)}
+												to={`/genre/${genre}`}
+												className="w-full p-2 text-center">
+												{genre}
+											</Link>
+										</motion.li>
+									))}
+								</motion.ul>
 							)}
 						</button>
 

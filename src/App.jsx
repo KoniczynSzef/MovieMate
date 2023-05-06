@@ -17,7 +17,6 @@ import NotFound from './pages/NotFound';
 import Category from './pages/Category';
 import People from './pages/People';
 import Person from './pages/Person';
-import Pagination from './components/Pagination';
 
 function App() {
 	const { movies, query, movie, category, person } = useContext(MoviesContext);
@@ -26,19 +25,23 @@ function App() {
 		<div className="App bg-[#171717] min-h-screen">
 			<Navbar />
 
-			<Routes>
-				<Route path="/" element={<Home />}></Route>
-				<Route path="/search" element={<Search movies={movies} query={query} />}></Route>
-				<Route path="/movies" element={<Movies movies={movies} />} />
-				<Route path="/series" element={<Series movies={movies} />} />
-				<Route path="/people" element={<People />} />
+			<div className="container mx-auto ">
+				<Routes>
+					<Route path="/" element={<Home />}></Route>
+					<Route
+						path="/search"
+						element={<Search movies={movies} query={query} />}></Route>
+					<Route path="/movies" element={<Movies movies={movies} />} />
+					<Route path="/series" element={<Series movies={movies} />} />
+					<Route path="/people" element={<People />} />
 
-				<Route path="/movies/:id" element={<Movie movie={movie} />} />
-				<Route path="/series/:id" element={<Movie movie={movie} />} />
-				<Route path="/genre/:genre" element={<Category category={category} />} />
-				<Route path="/people/:id" element={<Person person={person} />} />
-				<Route path="*" element={<NotFound />} />
-			</Routes>
+					<Route path="/movies/:id" element={<Movie movie={movie} />} />
+					<Route path="/series/:id" element={<Movie movie={movie} />} />
+					<Route path="/genre/:genre" element={<Category category={category} />} />
+					<Route path="/people/:id" element={<Person person={person} />} />
+					<Route path="*" element={<NotFound />} />
+				</Routes>
+			</div>
 		</div>
 	);
 }
