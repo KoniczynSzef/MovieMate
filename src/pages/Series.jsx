@@ -2,11 +2,16 @@ import { useContext, useEffect, useState } from 'react';
 import MoviesContext from '../data/MoviesContext';
 import { Link } from 'react-router-dom';
 import { fetchTopMovies } from '../data';
+import Pagination from '../components/Pagination';
 
 const Series = () => {
 	const { setMovie, setMovies, movies } = useContext(MoviesContext);
 	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
+
+	const getPage = (page) => {
+		setPage(page);
+	};
 
 	useEffect(() => {
 		const getTopMovies = async (type) => {
@@ -28,16 +33,7 @@ const Series = () => {
 					/>
 				</Link>
 			))}
-			{page > 1 && (
-				<button onClick={() => setPage((prev) => (prev -= 1))} className="bg-red-300 px-12">
-					Prev Page
-				</button>
-			)}
-			{page < totalPages && (
-				<button onClick={() => setPage((prev) => (prev += 1))} className="bg-red-300 px-12">
-					Next Page
-				</button>
-			)}
+			<Pagination page={page} getPage={getPage} totalPages={totalPages} />
 		</div>
 	);
 };

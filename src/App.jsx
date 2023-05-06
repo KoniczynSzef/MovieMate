@@ -17,6 +17,7 @@ import NotFound from './pages/NotFound';
 import Category from './pages/Category';
 import People from './pages/People';
 import Person from './pages/Person';
+import Pagination from './components/Pagination';
 
 function App() {
 	const { movies, query, movie, category, person } = useContext(MoviesContext);

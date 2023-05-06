@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchTrendingMovies } from '../data';
+import Pagination from '../components/Pagination';
 
 const Home = () => {
 	const [movies, setMovies] = useState([]);
 	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
+
+	const getPage = (page) => {
+		setPage(page);
+	};
 
 	useEffect(() => {
 		const getTrendingMovies = async () => {
@@ -32,16 +37,8 @@ const Home = () => {
 					))}
 				</div>
 			)}
-			{page > 1 && (
-				<button onClick={() => setPage((prev) => (prev -= 1))} className="bg-red-300 px-12">
-					Prev Page
-				</button>
-			)}
-			{page < totalPages && (
-				<button onClick={() => setPage((prev) => (prev += 1))} className="bg-red-300 px-12">
-					Next Page
-				</button>
-			)}
+
+			<Pagination page={page} getPage={getPage} totalPages={totalPages} />
 		</div>
 	);
 };

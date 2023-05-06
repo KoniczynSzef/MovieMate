@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { useContext, useEffect, useState } from 'react';
 import MoviesContext from '../data/MoviesContext';
 import { fetchTopMovies } from '../data';
+import Pagination from '../components/Pagination';
 
 const Movies = ({ movies }) => {
 	const { setMovie, setMovies } = useContext(MoviesContext);
 	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
+
+	const getPage = (page) => {
+		setPage(page);
+	};
 
 	useEffect(() => {
 		const getTopMovies = async (type) => {
@@ -31,16 +36,8 @@ const Movies = ({ movies }) => {
 					/>
 				</Link>
 			))}
-			{page > 1 && (
-				<button onClick={() => setPage((prev) => (prev -= 1))} className="bg-red-300 px-12">
-					Prev Page
-				</button>
-			)}
-			{page < totalPages && (
-				<button onClick={() => setPage((prev) => (prev += 1))} className="bg-red-300 px-12">
-					Next Page
-				</button>
-			)}
+
+			<Pagination page={page} getPage={getPage} totalPages={totalPages} />
 		</div>
 	);
 };

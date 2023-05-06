@@ -101,7 +101,7 @@ const Navbar = () => {
 												<Link
 													onClick={() => setCategory(genre)}
 													to={`/genre/${genre}`}
-													className="w-full p-2 pl-4">
+													className="w-full p-2 text-center">
 													{genre}
 												</Link>
 											</motion.li>
