@@ -2,16 +2,11 @@ import { Button, Container, HStack, useMediaQuery } from '@chakra-ui/react';
 import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
 
 const Pagination = ({ page, getPage, totalPages }) => {
 	const pages = [page, page + 1, page + 2, page + 3, page + 4];
 
 	const [isSmallerThanMd] = useMediaQuery('(max-width: 767px)');
-
-	useEffect(() => {
-		console.log(page);
-	}, [page]);
 
 	return (
 		<Container mx={'auto'} maxW={{ base: 'container.md', md: 'full' }} bg={'#272727'}>
@@ -28,7 +23,7 @@ const Pagination = ({ page, getPage, totalPages }) => {
 						<Button
 							hidden={isSmallerThanMd ? true : false}
 							isDisabled={
-								(page === 1 && pageNum === page) ||
+								pageNum === page ||
 								(page === totalPages && pageNum === totalPages && true)
 							}
 							key={pageNum}

@@ -5,10 +5,11 @@ import './App.css';
 // importing Context API
 import MoviesContext from './data/MoviesContext';
 
+import { Routes, Route } from 'react-router-dom';
+
 // importing components
 import Navbar from './components/Navbar';
 import Search from './pages/Search';
-import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Series from './pages/Series';
 import Movies from './pages/Movies';

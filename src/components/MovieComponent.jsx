@@ -9,8 +9,9 @@ const MovieComponent = ({ category, movie, index, page }) => {
 	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
+		// console.log(movie);
 		setVisible(true);
-	}, [page]);
+	}, [page, movie]);
 
 	return (
 		<motion.div
@@ -37,7 +38,7 @@ const MovieComponent = ({ category, movie, index, page }) => {
 
 MovieComponent.propTypes = {
 	category: PropTypes.string.isRequired,
-	movie: PropTypes.object.isRequired,
+	movie: PropTypes.any.isRequired,
 	index: PropTypes.number.isRequired,
 	page: PropTypes.number.isRequired,
 };
