@@ -2,32 +2,39 @@ import { useEffect, useState } from 'react';
 import { fetchTrendingMovies } from '../data';
 import Pagination from '../components/Pagination';
 import MovieComponent from '../components/MovieComponent';
+import { Spinner } from '@chakra-ui/react';
 
 const Home = () => {
+	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
 	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
 
-	const getPage = (page) => {
-		setPage(page);
+	const handlePageChange = (newPage) => {
+		if (newPage !== page) {
+			window.scrollTo({ behavior: 'smooth', top: 0 });
+			setTimeout(() => setPage(newPage), 500);
+		}
 	};
 
 	useEffect(() => {
 		const getTrendingMovies = async () => {
+			setIsLoading(true);
 			const [data, pages] = await fetchTrendingMovies(page);
 			setTotalPages(pages);
 			setMovies(data);
+			setTimeout(() => setIsLoading(false), 200);
 		};
 
 		getTrendingMovies();
 	}, [page]);
 
-	return (
+	return !isLoading ? (
 		<div>
 			{movies.length >= 1 && (
-				<div className="mt-24">
+				<div className="container mx-auto my-16 flex flex-col gap-16 px-2">
 					<h1 className="text-center text-4xl text-white">Current trending movies</h1>
-					<div className=" flex flex-wrap gap-12">
+					<div className=" flex flex-wrap gap-12 justify-center">
 						{movies.map((movie, index) => (
 							<MovieComponent
 								page={page}
@@ -41,8 +48,10 @@ const Home = () => {
 				</div>
 			)}
 
-			<Pagination page={page} getPage={getPage} totalPages={totalPages} />
+			<Pagination page={page} getPage={handlePageChange} totalPages={totalPages} />
 		</div>
+	) : (
+		<Spinner size={'xl'} color="purple.600" position={'absolute'} inset={'0'} m={'auto'} />
 	);
 };
 

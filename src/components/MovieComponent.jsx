@@ -14,14 +14,21 @@ const MovieComponent = ({ category, movie, index, page }) => {
 
 	return (
 		<motion.div
-			className="card w-64 h-96 relative mt-2 rounded-md overflow-hidden"
+			className="card w-64 h-96 relative mt-2 rounded-md"
 			initial={{ opacity: 0 }}
 			animate={visible ? { opacity: 1 } : { opacity: 0 }}
 			transition={{ duration: 0.25, delay: 0.1 * index }}>
-			<Link to={`/${category}/${movie.id}`} className="wrapper ">
+			<Link to={`/${category}/${movie.id}`} className="link-wrapper">
 				<Image
+					borderRadius={'md'}
 					as={motion.img}
 					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+					w={'64'}
+					h={'96'}
+					_hover={{ transform: 'scale(1.1)' }}
+					outlineOffset={'2px'}
+					_focusVisible={{ outline: '2px solid #272727' }}
+					transition={'300ms all ease-in-out'}
 				/>
 			</Link>
 		</motion.div>

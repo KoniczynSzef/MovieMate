@@ -1,6 +1,15 @@
 import axios from 'axios';
 import { GENRE_NAMES, GENRES } from './assets';
 
+const randomizeData = (data) => {
+	for (let i = data.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[data[i], data[j]] = [data[j], data[i]];
+	}
+
+	return data;
+};
+
 export const fetchData = async (query) => {
 	const response = await axios.request({
 		method: 'GET',
@@ -42,8 +51,11 @@ export const fetchTrendingMovies = async (page) => {
 		}&page=${page}`,
 	});
 
-	const data = await response.data;
-	return [data.results, data.total_pages];
+	const data = await response.data.results;
+
+	const dataRandomized = randomizeData(data);
+
+	return [dataRandomized, response.data.total_pages];
 };
 
 export const fetchTrendingPeople = async (page) => {
@@ -53,8 +65,11 @@ export const fetchTrendingPeople = async (page) => {
 		}&page=${page}`,
 	});
 
-	const data = await response.data;
-	return [data.results, data.total_pages];
+	const data = await response.data.results;
+
+	const dataRandomized = randomizeData(data);
+
+	return [dataRandomized, response.data.total_pages];
 };
 
 export const fetchTopMovies = async (type, page) => {
@@ -66,10 +81,7 @@ export const fetchTopMovies = async (type, page) => {
 
 	const data = await response.data.results;
 
-	for (let i = data.length - 1; i > 0; i--) {
-		const j = Math.floor(Math.random() * (i + 1));
-		[data[i], data[j]] = [data[j], data[i]];
-	}
+	const dataRandomized = randomizeData(data);
 
-	return [data, response.data.total_pages];
+	return [dataRandomized, response.data.total_pages];
 };

@@ -25,7 +25,7 @@ function App() {
 		<div className="App bg-[#171717] min-h-screen">
 			<Navbar />
 
-			<div className="container mx-auto ">
+			<div className="main-wrapper">
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
 					<Route
