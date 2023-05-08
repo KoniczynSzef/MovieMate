@@ -1,4 +1,4 @@
-import { useContext, useId, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -17,7 +17,6 @@ import LinkNavbar from './LinkNavbar';
 const Navbar = () => {
 	const navigate = useNavigate();
 
-	const inputId = useId();
 	const input = useRef();
 
 	const { setMovies, setQuery } = useContext(MoviesContext);
@@ -80,7 +79,6 @@ const Navbar = () => {
 								type="search"
 								placeholder="Search on MovieMate..."
 								className="px-3 border border-solid bg-[#070707] border-gray-700 py-2 text-gray-200 rounded-md outline-none"
-								id={inputId}
 								ref={input}
 							/>
 						</form>
