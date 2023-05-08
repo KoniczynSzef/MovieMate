@@ -3,13 +3,14 @@ import { Image } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import MoviesContext from '../data/MoviesContext';
 
-const MovieComponent = ({ category, movie, index, page }) => {
+const MovieComponent = ({ category, movie, index, page, isGenre }) => {
 	const [visible, setVisible] = useState(false);
+	const { setMovie } = useContext(MoviesContext);
 
 	useEffect(() => {
-		// console.log(movie);
 		setVisible(true);
 	}, [page, movie]);
 
@@ -19,7 +20,10 @@ const MovieComponent = ({ category, movie, index, page }) => {
 			initial={{ opacity: 0 }}
 			animate={visible ? { opacity: 1 } : { opacity: 0 }}
 			transition={{ duration: 0.25, delay: 0.1 * index }}>
-			<Link to={`/${category}/${movie.id}`} className="link-wrapper">
+			<Link
+				to={`/${category}/${movie.id}`}
+				className="link-wrapper"
+				onClick={isGenre && (() => setMovie(movie))}>
 				<Image
 					borderRadius={'md'}
 					as={motion.img}
@@ -41,6 +45,7 @@ MovieComponent.propTypes = {
 	movie: PropTypes.any.isRequired,
 	index: PropTypes.number.isRequired,
 	page: PropTypes.number.isRequired,
+	isGenre: PropTypes.bool.isRequired,
 };
 
 export default MovieComponent;

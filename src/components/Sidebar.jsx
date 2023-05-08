@@ -7,10 +7,11 @@ import {
 	DrawerContent,
 	DrawerOverlay,
 	useDisclosure,
+	useMediaQuery,
 } from '@chakra-ui/react';
 
 import { useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { GENRES, LINKS } from '../data/assets';
 
@@ -24,7 +25,9 @@ const Sidebar = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const btnRef = useRef();
 
-	const MotionLink = motion(Link);
+	const MotionLink = motion(NavLink);
+
+	const [isSmallerThanMd] = useMediaQuery('(max-height: 767px)');
 
 	const getTypeOfMovie = async (type) => {
 		if (type === 'movies') {
@@ -47,9 +50,14 @@ const Sidebar = () => {
 				fontSize={'2xl'}>
 				<HamburgerIcon />
 			</Button>
-			<Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}>
+			<Drawer
+				isOpen={isOpen}
+				placement="right"
+				onClose={onClose}
+				finalFocusRef={btnRef}
+				size={isSmallerThanMd ? 'full' : 'sm'}>
 				<DrawerOverlay />
-				<DrawerContent bg={'#070707'} position={'relative'} overflowY={'hidden'}>
+				<DrawerContent bg={'#070707'} position={'relative'}>
 					<DrawerCloseButton
 						color={'red'}
 						size={'lg'}
@@ -61,11 +69,10 @@ const Sidebar = () => {
 					<DrawerBody
 						display={'flex'}
 						alignItems={'center'}
-						justifyContent={'center'}
+						justifyContent={'space-evenly'}
 						flexDirection={'column'}
-						overflowY={'hidden'}
-						gap={'5rem'}>
-						<ul className="flex md:hidden">
+						overflowY={!isSmallerThanMd ? 'hidden' : 'auto'}>
+						<ul className="flex md:hidden z-50">
 							{LINKS.map((link, idx) => (
 								<LinkNavbar
 									key={idx}
@@ -77,7 +84,7 @@ const Sidebar = () => {
 						</ul>
 
 						<motion.ul
-							className="top-10 md:top-12 flex flex-col gap-2 z-50 w-64 text-center"
+							className="flex flex-col gap-2 z-50 w-64 text-center items-center justify-center"
 							key={'dropdown'}
 							transition={{ duration: 0.1 * GENRES.length }}>
 							{GENRES.map((genre, index) => (
@@ -94,7 +101,10 @@ const Sidebar = () => {
 										setCategory(genre), onClose();
 									}}
 									to={`/genre/${genre}`}
-									className="w-64 py-2 rounded-sm hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300">
+									className={({ isActive }) =>
+										`${isActive ? `bg-[#272727] pointer-events-none` : ''}
+										 w-24 md:w-64 py-2 rounded-sm hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300`
+									}>
 									{genre}
 								</MotionLink>
 							))}

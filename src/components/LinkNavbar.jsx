@@ -1,16 +1,20 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const LinkNavbar = ({ link, idx, getTypeOfMovie }) => {
 	return (
 		<li key={idx}>
-			<Link
+			<NavLink
 				tabIndex={idx + 2}
 				onClick={() => getTypeOfMovie(link)}
 				to={`/${link}`}
-				className="px-5 py-2 rounded-sm hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300">
+				className={({ isActive }) =>
+					` ${
+						isActive ? `bg-[#272727] pointer-events-none` : ``
+					} px-5 py-2 rounded-sm hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300`
+				}>
 				{link}
-			</Link>
+			</NavLink>
 		</li>
 	);
 };

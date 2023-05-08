@@ -42,6 +42,7 @@ const Home = () => {
 								key={movie.id}
 								category={'movies'}
 								index={index}
+								isGenre={false}
 							/>
 						))}
 					</div>

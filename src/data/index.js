@@ -39,9 +39,11 @@ export const fetchGenre = async (genre, page) => {
 			import.meta.env.VITE_KEY
 		}&language=en-us&with_genres=${genreID}&page=${page}`,
 	);
-	const data = await response.data;
+	const data = await response.data.results;
 
-	return [data.results, data.total_pages];
+	const dataRandomized = randomizeData(data);
+
+	return [dataRandomized, response.data.total_pages];
 };
 
 export const fetchTrendingMovies = async (page) => {

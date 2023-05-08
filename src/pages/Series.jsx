@@ -21,7 +21,6 @@ const Series = () => {
 	useEffect(() => {
 		const getTopMovies = async (type) => {
 			setIsLoading(true);
-			console.log('123');
 			const [data, pages] = await fetchTopMovies(type, page);
 			setTotalPages(pages);
 			setMovies(data);
@@ -43,6 +42,7 @@ const Series = () => {
 							key={index}
 							category={'tv'}
 							index={index}
+							isGenre={false}
 						/>
 					))}
 				</div>
