@@ -4,7 +4,7 @@ import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import PropTypes from 'prop-types';
 
 const Pagination = ({ page, getPage, totalPages }) => {
-	const pages = [page, page + 1, page + 2, page + 3, page + 4];
+	const pages = [page + 1, page + 2, page + 3];
 
 	const [isSmallerThanMd] = useMediaQuery('(max-width: 767px)');
 
@@ -19,13 +19,19 @@ const Pagination = ({ page, getPage, totalPages }) => {
 					Previous page
 				</Button>
 				<HStack spacing={'2'}>
+					<Button
+						isDisabled={page === 1 && true}
+						hidden={isSmallerThanMd ? true : false}
+						key={1}
+						onClick={() => getPage(1)}
+						colorScheme={'red'}
+						color={'white'}>
+						1
+					</Button>
 					{pages.map((pageNum) => (
 						<Button
 							hidden={isSmallerThanMd ? true : false}
-							isDisabled={
-								pageNum === page ||
-								(page === totalPages && pageNum === totalPages && true)
-							}
+							isDisabled={pageNum > totalPages || pageNum === page ? true : false}
 							key={pageNum}
 							onClick={() => getPage(pageNum)}
 							bg={'twitter.800'}
@@ -34,6 +40,15 @@ const Pagination = ({ page, getPage, totalPages }) => {
 							{pageNum}
 						</Button>
 					))}
+					<Button
+						isDisabled={page === totalPages && true}
+						hidden={isSmallerThanMd ? true : false}
+						key={totalPages}
+						onClick={() => getPage(totalPages)}
+						colorScheme={'teal'}
+						color={'white'}>
+						{totalPages}
+					</Button>
 				</HStack>
 				<Button
 					isDisabled={page === totalPages && true}

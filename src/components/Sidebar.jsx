@@ -9,6 +9,7 @@ import {
 	useDisclosure,
 	useMediaQuery,
 } from '@chakra-ui/react';
+import './Sidebar.css';
 
 import { useContext, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -72,29 +73,34 @@ const Sidebar = () => {
 						justifyContent={'space-evenly'}
 						flexDirection={'column'}
 						overflowY={!isSmallerThanMd ? 'hidden' : 'auto'}>
-						<ul className="flex md:hidden z-50">
+						<ul className="nav-links-menu flex md:hidden z-50">
 							{LINKS.map((link, idx) => (
 								<LinkNavbar
 									key={idx}
 									getTypeOfMovie={getTypeOfMovie}
 									link={link}
 									idx={idx}
+									onClose={onClose}
+									isSidebar={true}
 								/>
 							))}
 						</ul>
 
 						<motion.ul
-							className="flex flex-col gap-2 z-50 w-64 text-center items-center justify-center"
+							className={`${
+								isSmallerThanMd
+									? 'flex-wrap flex-row w-full'
+									: 'flex-nowrap flex-col w-64'
+							} genre-links-menu relative flex gap-2 z-50 text-center items-center justify-center`}
 							key={'dropdown'}
 							transition={{ duration: 0.1 * GENRES.length }}>
 							{GENRES.map((genre, index) => (
 								<MotionLink
 									initial={{
-										opacity: 0,
 										x: -100,
 										filter: 'blur(5px)',
 									}}
-									animate={{ opacity: 1, x: 0, filter: 'blur(0)' }}
+									animate={{ x: 0, filter: 'blur(0)' }}
 									transition={{ duration: 0.25, delay: 0.1 * index }}
 									key={index}
 									onClick={() => {

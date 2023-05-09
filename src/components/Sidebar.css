@@ -1,0 +1,12 @@
+@media only screen and (max-width: 767px) and (orientation: landscape) {
+	.nav-links-menu {
+		display: flex;
+	}
+
+	.genre-links-menu {
+		flex-direction: row;
+		height: auto;
+		width: 100%;
+		flex-wrap: wrap;
+	}
+}

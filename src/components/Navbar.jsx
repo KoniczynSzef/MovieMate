@@ -7,7 +7,7 @@ import logo from '../assets/vite.svg';
 import { LINKS } from '../data/assets';
 import './Navbar.css';
 
-import { fetchData, fetchTopMovies } from '../data';
+import { fetchTopMovies } from '../data';
 import MoviesContext from '../data/MoviesContext';
 
 import '../App.css';
@@ -24,8 +24,8 @@ const Navbar = () => {
 	const getData = async () => {
 		const q = input.current.value;
 		setQuery(q);
-		const fetchedMovies = await fetchData(q);
-		setMovies(fetchedMovies);
+		// const fetchedMovies = await fetchData(q);
+		// setMovies(fetchedMovies);
 	};
 
 	const getTypeOfMovie = async (type) => {
@@ -52,7 +52,7 @@ const Navbar = () => {
 						input.current.value = '';
 						navigate('/');
 					}}>
-					<img src={logo} alt="" className="scale-125 md:scale-150" />
+					<img src={logo} alt="" className="scale-125" />
 				</Link>
 
 				<nav>
@@ -67,7 +67,6 @@ const Navbar = () => {
 								/>
 							))}
 						</div>
-
 						<form
 							className="flex"
 							onSubmit={(e) => {

@@ -10,20 +10,16 @@ const randomizeData = (data) => {
 	return data;
 };
 
-export const fetchData = async (query) => {
+export const fetchData = async (query, page) => {
 	const response = await axios.request({
 		method: 'GET',
 		url: `https://api.themoviedb.org/3/search/multi?api_key=${
 			import.meta.env.VITE_KEY
-		}&language=en-us`,
-
-		params: {
-			query: query,
-		},
+		}&language=en-us&query=${query}&page=${page}`,
 	});
 
 	const data = await response.data.results;
-	return data;
+	return [data, response.data.total_pages];
 };
 
 export const fetchGenre = async (genre, page) => {
