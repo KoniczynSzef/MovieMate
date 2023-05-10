@@ -13,7 +13,6 @@ const Series = () => {
 	const { setMovies, movies } = useContext(MoviesContext);
 	const [page, setPage] = useState(1);
 	const [totalPages, setTotalPages] = useState(0);
-	const [errorFetching, setErrorFetching] = useState(false);
 
 	const handlePageChange = (newPage) => {
 		if (newPage !== page) {
