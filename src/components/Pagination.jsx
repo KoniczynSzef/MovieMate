@@ -45,14 +45,14 @@ const Pagination = ({ page, getPage, totalPages }) => {
 						hidden={isSmallerThanMd ? true : false}
 						key={totalPages}
 						onClick={() => getPage(totalPages)}
-						colorScheme={'teal'}
+						colorScheme={'green'}
 						color={'white'}>
 						{totalPages}
 					</Button>
 				</HStack>
 				<Button
 					isDisabled={page === totalPages && true}
-					colorScheme="teal"
+					colorScheme="green"
 					rightIcon={<ArrowForwardIcon />}
 					onClick={() => getPage(page + 1)}>
 					Next page

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 import logo from '../assets/vite.svg';
+import koniczyneczka from '../assets/logo.png';
 import { LINKS } from '../data/assets';
 import './Navbar.css';
 
@@ -24,8 +25,6 @@ const Navbar = () => {
 	const getData = async () => {
 		const q = input.current.value;
 		setQuery(q);
-		// const fetchedMovies = await fetchData(q);
-		// setMovies(fetchedMovies);
 	};
 
 	const getTypeOfMovie = async (type) => {
@@ -52,7 +51,7 @@ const Navbar = () => {
 						input.current.value = '';
 						navigate('/');
 					}}>
-					<img src={logo} alt="" className="scale-125" />
+					<img src={koniczyneczka} alt="" className="scale-100 max-w-[5rem]" />
 				</Link>
 
 				<nav>

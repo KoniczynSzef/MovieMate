@@ -3,7 +3,7 @@
 }
 
 .logo:hover > img {
-	filter: drop-shadow(0px 0px 10px dodgerblue);
+	filter: drop-shadow(0px 0px 10px #62a53c);
 	scale: 1.05;
 }
 

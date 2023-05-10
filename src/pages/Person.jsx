@@ -14,7 +14,7 @@ const Person = ({ person, page, index }) => {
 	return (
 		person.profile_path && (
 			<motion.div
-				className="card w-64 h-96 relative mt-2 rounded-md"
+				className="card w-64 rounded-md border-2 border-slate-100 hover:scale-[1.05] hover:bg-[#272727] transition duration-300"
 				initial={{ opacity: 0 }}
 				animate={visible ? { opacity: 1 } : { opacity: 0 }}
 				transition={{ duration: 0.25, delay: 0.1 * index }}>
@@ -34,7 +34,7 @@ const Person = ({ person, page, index }) => {
 								border={'2px solid white'}
 								borderRadius={'md'}>
 								<Text fontSize={'3xl'} color={'white'} mx={'auto'}>
-									{person.name}
+									<cite>{person.name}</cite>
 								</Text>
 								<Text mx={'auto'} fontSize={'xl'} color={'white'}>
 									Image not found
@@ -42,12 +42,20 @@ const Person = ({ person, page, index }) => {
 							</Box>
 						}
 						w={'64'}
-						h={'96'}
-						_hover={{ transform: 'scale(1.1)' }}
 						outlineOffset={'2px'}
 						_focusVisible={{ outline: '2px solid #272727' }}
 						transition={'300ms all ease-in-out'}
 					/>
+					<Text
+						textAlign={'center'}
+						color={'white'}
+						fontSize={'2xl'}
+						py={'4'}
+						display={'flex'}
+						alignItems={'center'}
+						justifyContent={'center'}>
+						<cite>{person.name}</cite>
+					</Text>
 				</Link>
 			</motion.div>
 		)

@@ -23,6 +23,7 @@ const Home = () => {
 			const [data, pages] = await fetchTrendingMovies(page);
 			setTotalPages(pages);
 			setMovies(data);
+			console.log(data);
 			setTimeout(() => setIsLoading(false), 200);
 		};
 
