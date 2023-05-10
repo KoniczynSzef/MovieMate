@@ -57,7 +57,7 @@ const Sidebar = () => {
         placement="right"
         onClose={onClose}
         finalFocusRef={btnRef}
-        size={isSmallerThanMd ? "full" : "sm"}
+        size={!isSmallerThanMd ? "full" : "sm"}
       >
         <DrawerOverlay />
         <DrawerContent bg={"#070707"} position={"relative"}>
@@ -65,7 +65,7 @@ const Sidebar = () => {
             color={"red"}
             size={"lg"}
             position={"absolute"}
-            right={"0"}
+            right={"1.5"}
             _hover={{ bg: "#272727" }}
           />
 
@@ -74,6 +74,7 @@ const Sidebar = () => {
             alignItems={"center"}
             justifyContent={"space-evenly"}
             flexDirection={"column"}
+            py={"4"}
             overflowY={!isSmallerThanMd ? "hidden" : "auto"}
           >
             <ul className="nav-links-menu flex md:hidden z-50">
@@ -91,10 +92,10 @@ const Sidebar = () => {
 
             <motion.ul
               className={`${
-                isSmallerThanMd
-                  ? "flex-wrap flex-row w-full"
-                  : "flex-nowrap flex-col w-64"
-              } genre-links-menu relative flex gap-2 z-50 text-center items-center justify-center`}
+                !isSmallerThanMd
+                  ? "flex-wrap flex-row w-full gap-2"
+                  : "flex-nowrap flex-col w-64 gap-0 mt-8"
+              } genre-links-menu relative flex z-50 text-center items-center justify-center`}
               key={"dropdown"}
               transition={{ duration: 0.1 * GENRES.length }}
             >
