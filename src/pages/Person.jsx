@@ -14,11 +14,11 @@ const Person = ({ person, page, index }) => {
 	return (
 		person.profile_path && (
 			<motion.div
-				className="card w-64 rounded-md border-2 border-slate-100 hover:scale-[1.05] hover:bg-[#272727] transition duration-300"
+				className="card h-[28rem] w-[15rem] relative rounded-md border-2 border-slate-400 hover:scale-[1.05] transition duration-300 overflow-hidden hover:bg-[#272727]"
 				initial={{ opacity: 0 }}
 				animate={visible ? { opacity: 1 } : { opacity: 0 }}
 				transition={{ duration: 0.25, delay: 0.1 * index }}>
-				<Link to={`/people/${person.id}`} className="link-wrapper">
+				<Link to={`/actors/${person.id}`} className="link-wrapper">
 					<Image
 						borderRadius={'md'}
 						as={motion.img}
@@ -33,29 +33,56 @@ const Person = ({ person, page, index }) => {
 								placeContent={'center'}
 								border={'2px solid white'}
 								borderRadius={'md'}>
-								<Text fontSize={'3xl'} color={'white'} mx={'auto'}>
-									<cite>{person.name}</cite>
+								<Text
+									fontSize={'3xl'}
+									color={'white'}
+									mx={'auto'}
+									fontWeight={'bold'}>
+									{person.name}
 								</Text>
 								<Text mx={'auto'} fontSize={'xl'} color={'white'}>
 									Image not found
 								</Text>
 							</Box>
 						}
-						w={'64'}
+						w={'full'}
 						outlineOffset={'2px'}
 						_focusVisible={{ outline: '2px solid #272727' }}
 						transition={'300ms all ease-in-out'}
 					/>
-					<Text
-						textAlign={'center'}
-						color={'white'}
-						fontSize={'2xl'}
-						py={'4'}
+					<Box
+						h={'6rem'}
 						display={'flex'}
 						alignItems={'center'}
 						justifyContent={'center'}>
-						<cite>{person.name}</cite>
-					</Text>
+						{person.name ? (
+							<Text
+								className="person-text"
+								textAlign={'center'}
+								color={'white'}
+								fontSize={'xl'}
+								fontWeight={'600'}
+								h={'100%'}
+								px={'2'}
+								display={'flex'}
+								alignItems={'center'}
+								justifyContent={'center'}>
+								{person.name}
+							</Text>
+						) : (
+							<Text
+								textAlign={'center'}
+								color={'white'}
+								fontSize={'2xl'}
+								py={'4'}
+								px={'2'}
+								display={'flex'}
+								alignItems={'center'}
+								justifyContent={'center'}>
+								Movie not found
+							</Text>
+						)}
+					</Box>
 				</Link>
 			</motion.div>
 		)

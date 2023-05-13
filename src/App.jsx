@@ -34,12 +34,12 @@ function App() {
 						element={<Search movies={movies} query={query} />}></Route>
 					<Route path="/movies" element={<Movies movies={movies} />} />
 					<Route path="/series" element={<Series movies={movies} />} />
-					<Route path="/people" element={<People />} />
+					<Route path="/actors" element={<People />} />
 
 					<Route path="/movies/:id" element={<Movie movie={movie} />} />
 					<Route path="/series/:id" element={<Movie movie={movie} />} />
 					<Route path="/genre/:genre" element={<Category category={category} />} />
-					<Route path="/people/:id" element={<Person person={person} />} />
+					<Route path="/actors/:id" element={<Person person={person} />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>

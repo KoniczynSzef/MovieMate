@@ -41,7 +41,7 @@ const Movies = ({ movies }) => {
 		<div className="min-h-screen flex flex-col justify-between">
 			<div className="container mx-auto flex flex-col gap-16 my-16">
 				<h1 className="text-center text-4xl text-white"> Top rated movies, page {page}</h1>
-				<div className="flex flex-wrap gap-12 justify-center items-center">
+				<div className="flex flex-wrap gap-4 justify-center items-center">
 					{movies.map((movie, index) =>
 						movie.id !== undefined ? (
 							<MovieComponent
