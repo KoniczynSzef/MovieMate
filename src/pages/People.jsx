@@ -42,7 +42,7 @@ const People = () => {
 			<Pagination page={page} totalPages={totalPages} getPage={handlePageChange} />
 		</div>
 	) : (
-		<Spinner size={'xl'} color="purple.600" position={'absolute'} inset={'0'} m={'auto'} />
+		<Spinner size={'xl'} color="green.600" position={'absolute'} inset={'0'} m={'auto'} />
 	);
 };
 

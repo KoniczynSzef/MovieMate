@@ -71,7 +71,9 @@ const Series = () => {
 			</div>
 		</div>
 	) : (
-		<Spinner size={'xl'} color="purple.600" position={'absolute'} inset={'0'} m={'auto'} />
+		<div className="h-screen flex items-center justify-center">
+			<Spinner size={'xl'} color="green.600" mb={'40'} />
+		</div>
 	);
 };
 

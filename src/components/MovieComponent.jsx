@@ -14,8 +14,6 @@ const MovieComponent = ({ movie, index, page }) => {
 		setVisible(true);
 	}, [page, movie]);
 
-	console.log(movie);
-
 	const isNotAMovie = movie.media_type === 'tv' ? true : false;
 
 	return (

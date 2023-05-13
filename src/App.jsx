@@ -25,10 +25,10 @@ function App() {
 		useContext(MoviesContext);
 
 	return (
-		<div className="App bg-[#171717] min-h-screen ">
+		<div className="App bg-[#171717] min-h-screen">
 			<Navbar />
 
-			<div className="main-wrapper">
+			<div className="main-wrapper relative">
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
 					<Route
