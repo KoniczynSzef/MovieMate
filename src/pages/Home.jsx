@@ -23,7 +23,6 @@ const Home = () => {
 			const [data, pages] = await fetchTrendingMovies(page);
 			setTotalPages(pages);
 			setMovies(data);
-			console.log(data);
 			setTimeout(() => setIsLoading(false), 200);
 		};
 
@@ -34,16 +33,16 @@ const Home = () => {
 		<div>
 			{movies.length >= 1 && (
 				<div className="container mx-auto my-16 mt-32 flex flex-col gap-32 px-2">
-					<h1 className="text-center text-4xl text-white">Current trending movies</h1>
+					<h1 className="text-center text-4xl text-white">
+						Current trending on MovieMate
+					</h1>
 					<div className="flex flex-wrap justify-center items-center gap-16">
 						{movies.map((movie, index) => (
 							<MovieComponent
 								page={page}
 								movie={movie}
 								key={movie.id}
-								category={'movies'}
 								index={index}
-								isGenre={false}
 							/>
 						))}
 					</div>

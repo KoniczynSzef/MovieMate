@@ -1,11 +1,16 @@
 import { PropTypes } from 'prop-types';
+import { useEffect } from 'react';
 
-const Movie = ({ movie }) => {
-	return <div>Movie {movie.id}</div>;
+const Movie = ({ singleMovie }) => {
+	useEffect(() => {
+		console.log(singleMovie);
+	}, [singleMovie]);
+
+	return <div className="text-white">Movie {singleMovie.id || 'Brak'}</div>;
 };
 
 Movie.propTypes = {
-	movie: PropTypes.object,
+	singleMovie: PropTypes.object,
 };
 
 export default Movie;

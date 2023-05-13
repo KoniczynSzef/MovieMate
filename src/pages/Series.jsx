@@ -45,9 +45,7 @@ const Series = () => {
 								page={page}
 								movie={movie}
 								key={movie.id}
-								category={'movies'}
 								index={index}
-								isGenre={false}
 							/>
 						) : (
 							<MotionText

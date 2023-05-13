@@ -5,14 +5,18 @@ import { motion } from 'framer-motion';
 import { useContext, useEffect, useState, useId } from 'react';
 import MoviesContext from '../data/MoviesContext';
 
-const MovieComponent = ({ category, movie, index, page, isGenre }) => {
+const MovieComponent = ({ movie, index, page }) => {
 	const [visible, setVisible] = useState(false);
-	const { setMovie } = useContext(MoviesContext);
+	const { setSingleMovie, setSingleSeries } = useContext(MoviesContext);
 	const id = useId();
 
 	useEffect(() => {
 		setVisible(true);
 	}, [page, movie]);
+
+	console.log(movie);
+
+	const isNotAMovie = movie.media_type === 'tv' ? true : false;
 
 	return (
 		movie.poster_path && (
@@ -23,9 +27,11 @@ const MovieComponent = ({ category, movie, index, page, isGenre }) => {
 				animate={visible ? { top: 0 } : { top: '4rem' }}
 				transition={{ duration: 0.25, delay: 0.1 * index }}>
 				<Link
-					to={`/${category}/${movie.id}`}
+					to={`/${movie.media_type === 'tv' ? 'series' : 'movies'}/${movie.id}`}
 					className="link-wrapper flex flex-col justify-between h-full"
-					onClick={isGenre && (() => setMovie(movie))}>
+					onClick={
+						isNotAMovie ? () => setSingleSeries(movie) : () => setSingleMovie(movie)
+					}>
 					<Image
 						as={motion.img}
 						src={
@@ -73,11 +79,9 @@ const MovieComponent = ({ category, movie, index, page, isGenre }) => {
 };
 
 MovieComponent.propTypes = {
-	category: PropTypes.string.isRequired,
 	movie: PropTypes.any.isRequired,
 	index: PropTypes.number.isRequired,
 	page: PropTypes.number.isRequired,
-	isGenre: PropTypes.bool.isRequired,
 };
 
 export default MovieComponent;

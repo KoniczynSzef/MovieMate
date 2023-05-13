@@ -6,7 +6,9 @@ const MoviesContext = createContext();
 export const MoviesContextProvider = ({ children }) => {
 	const [movies, setMovies] = useState([]);
 	const [query, setQuery] = useState('');
-	const [movie, setMovie] = useState({});
+
+	const [singleMovie, setSingleMovie] = useState({});
+	const [singleSeries, setSingleSeries] = useState({});
 
 	const [category, setCategory] = useState('');
 	const [person, setPerson] = useState({});
@@ -18,8 +20,10 @@ export const MoviesContextProvider = ({ children }) => {
 				setMovies,
 				query,
 				setQuery,
-				movie,
-				setMovie,
+				singleMovie,
+				setSingleMovie,
+				singleSeries,
+				setSingleSeries,
 				category,
 				setCategory,
 				person,
