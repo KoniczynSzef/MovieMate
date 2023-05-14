@@ -19,6 +19,7 @@ import Category from './pages/Category';
 import People from './pages/People';
 import Person from './pages/Person';
 import Serie from './pages/Serie';
+import Actor from './pages/Actor';
 
 function App() {
 	const { movies, query, singleMovie, singleSeries, category, person } =
@@ -41,7 +42,7 @@ function App() {
 					<Route path="/movies/:id" element={<Movie singleMovie={singleMovie} />} />
 					<Route path="/series/:id" element={<Serie singleSeries={singleSeries} />} />
 					<Route path="/genre/:genre" element={<Category category={category} />} />
-					<Route path="/actors/:id" element={<Person person={person} />} />
+					<Route path="/actors/:id" element={<Actor person={person} />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</div>

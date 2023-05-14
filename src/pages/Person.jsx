@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Image, Text } from '@chakra-ui/react';
+import MoviesContext from '../data/MoviesContext';
 
 const Person = ({ person, page, index }) => {
 	const [visible, setVisible] = useState(false);
+	const { setPerson } = useContext(MoviesContext);
 
 	useEffect(() => {
 		setVisible(true);
@@ -14,6 +16,7 @@ const Person = ({ person, page, index }) => {
 	return (
 		person.profile_path && (
 			<motion.div
+				onClick={() => setPerson(person)}
 				className="card h-[28rem] w-[15rem] relative rounded-md border-2 border-slate-400 hover:scale-[1.05] transition duration-300 overflow-hidden hover:bg-[#272727]"
 				initial={{ opacity: 0 }}
 				animate={visible ? { opacity: 1 } : { opacity: 0 }}

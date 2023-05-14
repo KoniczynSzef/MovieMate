@@ -2,17 +2,12 @@ import { Box, Image, Text } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useContext, useEffect, useState, useId } from 'react';
+import { useContext, useId } from 'react';
 import MoviesContext from '../data/MoviesContext';
 
-const MovieComponent = ({ movie, index, page }) => {
-	const [visible, setVisible] = useState(false);
+const MovieComponent = ({ movie, index }) => {
 	const { setSingleMovie, setSingleSeries } = useContext(MoviesContext);
 	const id = useId();
-
-	useEffect(() => {
-		setVisible(true);
-	}, [page, movie]);
 
 	const isNotAMovie = movie.media_type === 'tv' ? true : false;
 
@@ -21,8 +16,8 @@ const MovieComponent = ({ movie, index, page }) => {
 			<motion.div
 				key={id}
 				className="card h-[28rem] w-[15rem] relative rounded-md border-2 border-slate-400 hover:scale-[1.05] transition duration-300 overflow-hidden hover:bg-[#272727]"
-				initial={{ top: '4rem' }}
-				animate={visible ? { top: 0 } : { top: '4rem' }}
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
 				transition={{ duration: 0.25, delay: 0.1 * index }}>
 				<Link
 					to={`/${movie.media_type === 'tv' ? 'series' : 'movies'}/${movie.id}`}

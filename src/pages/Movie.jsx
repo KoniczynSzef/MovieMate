@@ -33,19 +33,19 @@ const Movie = ({ singleMovie }) => {
 						</div>
 					</div>
 					<h5 className="text-white text-xl">{movie.release_date.slice(0, 4)}</h5>
-					<div className="flex gap-12">
+					<div className="flex gap-12 flex-col md:flex-row">
 						<img
 							src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 							alt=""
-							className="rounded-md max-w-[24rem]"
+							className="rounded-md md:max-w-[24rem]"
 						/>
-						<div className="ml-auto max-w-[50%] flex flex-col justify-between">
+						<div className="ml-auto md:max-w-[50%] flex flex-col gap-12 md:gap-0 justify-between">
 							<img
 								src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
 								alt=""
 								className="ml-auto"
 							/>
-							<p className="text-white text-2xl leading-10 text-right">
+							<p className="text-white text-2xl leading-10 text-center md:text-right">
 								{movie.overview}
 							</p>
 						</div>
@@ -75,7 +75,7 @@ const Movie = ({ singleMovie }) => {
 				Too many requests. Try one more time
 			</Text>
 			<Link to={'/'}>
-				<Button colorScheme="green" size={'lg'} p={'12'} fontSize={'3xl'}>
+				<Button colorScheme="green" size={'lg'}>
 					See the best movies
 				</Button>
 			</Link>

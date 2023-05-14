@@ -24,7 +24,10 @@ const People = () => {
 			const [data, pages] = await fetchTrendingPeople(page);
 			setTotalPages(pages);
 			setPersons(data);
-			setIsLoading(false);
+
+			setTimeout(() => {
+				setIsLoading(false);
+			}, 350);
 		};
 
 		getPeople();
@@ -32,8 +35,9 @@ const People = () => {
 
 	return !isLoading ? (
 		<div>
-			<div className="container mx-auto flex flex-col gap-16 my-16">
-				<div className="flex flex-wrap gap-12 justify-center items-center">
+			<div className="container mx-auto flex flex-col gap-32 my-32">
+				<h1 className="text-center text-4xl text-white">Most popular actors</h1>
+				<div className="flex flex-wrap gap-16 justify-center items-center">
 					{persons.map((person, index) => (
 						<Person person={person} index={index} key={index} />
 					))}
@@ -42,7 +46,9 @@ const People = () => {
 			<Pagination page={page} totalPages={totalPages} getPage={handlePageChange} />
 		</div>
 	) : (
-		<Spinner size={'xl'} color="green.600" position={'absolute'} inset={'0'} m={'auto'} />
+		<div className="h-screen flex items-center justify-center">
+			<Spinner size={'xl'} color="green.600" mb={'40'} />
+		</div>
 	);
 };
 
