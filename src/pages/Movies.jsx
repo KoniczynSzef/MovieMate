@@ -23,6 +23,10 @@ const Movies = ({ movies }) => {
 	};
 
 	useEffect(() => {
+		window.scrollTo({ behavior: 'smooth', top: 0 });
+	}, []);
+
+	useEffect(() => {
 		const getTopMovies = async (type) => {
 			setIsLoading(true);
 			const [data, pages] = await fetchTopMovies(type, page);

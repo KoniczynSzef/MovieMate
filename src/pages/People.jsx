@@ -19,6 +19,10 @@ const People = () => {
 	};
 
 	useEffect(() => {
+		window.scrollTo({ behavior: 'smooth', top: 0 });
+	}, []);
+
+	useEffect(() => {
 		const getPeople = async () => {
 			setIsLoading(true);
 			const [data, pages] = await fetchTrendingPeople(page);

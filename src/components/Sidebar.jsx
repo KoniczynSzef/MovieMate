@@ -73,7 +73,6 @@ const Sidebar = () => {
 						justifyContent={'center'}
 						flexDirection={'column'}
 						py={'4'}
-						// gap={'2rem'}
 						overflowY={!isSmallerThanMd ? 'hidden' : 'auto'}>
 						<ul className="nav-links-menu flex md:hidden z-50">
 							{LINKS.map((link, idx) => (
@@ -93,7 +92,7 @@ const Sidebar = () => {
 								isSmallerThanMd
 									? 'flex-wrap flex-row w-full gap-0'
 									: 'flex-nowrap flex-col w-64 gap-1 mt-4'
-							} genre-links-menu relative flex z-50 text-center items-center justify-center`}
+							} genre-links-menu relative flex z-50 text-center items-center justify-center scale-[0.85]`}
 							key={'dropdown'}
 							transition={{ duration: 0.1 * GENRES.length }}>
 							{GENRES.map((genre, index) => (

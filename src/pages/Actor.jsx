@@ -1,11 +1,19 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowForwardIcon, StarIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useContext, useEffect } from 'react';
+import MoviesContext from '../data/MoviesContext';
 
 const Actor = ({ person }) => {
-	console.log(person);
+	const { setSingleMovie } = useContext(MoviesContext);
+	const knownFor = person.known_for;
+
+	useEffect(() => {
+		window.scrollTo({ behavior: 'smooth', top: 0 });
+	}, []);
+
 	return person.name ? (
 		<motion.div
 			className="min-h-screen"
@@ -16,48 +24,51 @@ const Actor = ({ person }) => {
 				<div className="flex flex-col gap-4 w-full">
 					<div className="flex w-full justify-between">
 						<h2 className="text-white text-5xl">{person.name}</h2>
-						<div className="flex flex-col gap-4">
-							<h5 className="text-slate-300 text-2xl">
-								MovieMate <span className="uppercase">rating</span>
-							</h5>
-							<div className="flex items-center gap-4">
-								{/* <StarIcon boxSize={'10'} color={'yellow.400'} />
-								<div className="flex text-white text-3xl">
-									<h3 className="font-semibold">
-										{person.vote_average.toFixed(1)}
-									</h3>
-									<span>/10</span>
-								</div> */}
-							</div>
-						</div>
 					</div>
-					{/* <h5 className="text-white text-xl">{person.release_date.slice(0, 4)}</h5> */}
-					<div className="flex gap-12">
+
+					<div className="flex flex-col md:flex-row gap-12 my-12">
 						<img
 							src={`https://image.tmdb.org/t/p/w500${person.profile_path}`}
 							alt=""
-							className="rounded-md max-w-[24rem]"
+							className="rounded-md max-w-[30rem] w-full bg-red-50 self-start"
 						/>
-						<div className="ml-auto max-w-[50%] flex flex-col justify-between">
-							<img
-								src={`https://image.tmdb.org/t/p/w500${person.backdrop_path}`}
-								alt=""
-								className="ml-auto"
-							/>
-							<p className="text-white text-2xl leading-10 text-right">
-								{person.overview}
-							</p>
+						<div className="ml-auto md:max-w-[50%] flex flex-col items-center justify-center">
+							<h3 className="text-center text-white text-3xl">Known for: </h3>
+							<div className="flex gap-10 flex-col md:flex-wrap w-full my-12">
+								{knownFor.map((movie, idx) => (
+									<Link
+										key={idx}
+										onClick={() => setSingleMovie(movie)}
+										to={`/${
+											movie.media_type === 'movie' ? `movies` : `series`
+										}/${movie.id}`}
+										className="border-2 border-slate-400 rounded-md hover:bg-[#272727] hover:scale-105 transition duration-200">
+										<img
+											className="mx-auto rounded-md border-2 border-slate-400"
+											src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+											alt=""
+										/>
+										<Text
+											color={'white'}
+											textAlign={'center'}
+											py={'2'}
+											fontSize={'2xl'}>
+											<q>{movie.title}</q>
+										</Text>
+									</Link>
+								))}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<Box w={'full'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-				<Link to={'/'}>
+				<Link to={'/'} className="mb-4">
 					<Button
 						colorScheme="green"
 						fontSize={'xl'}
 						p={'6'}
-						rightIcon={<ArrowForwardIcon />}>
+						leftIcon={<ArrowBackIcon />}>
 						Go to home page
 					</Button>
 				</Link>
@@ -80,6 +91,10 @@ const Actor = ({ person }) => {
 			</Link>
 		</Box>
 	);
+};
+
+Actor.propTypes = {
+	person: PropTypes.object,
 };
 
 export default Actor;

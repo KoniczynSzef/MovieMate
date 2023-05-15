@@ -22,6 +22,10 @@ const Category = () => {
 	};
 
 	useEffect(() => {
+		window.scrollTo({ behavior: 'smooth', top: 0 });
+	}, []);
+
+	useEffect(() => {
 		const getGenre = async () => {
 			setIsLoading(true);
 			const [data, pages] = await fetchGenre(category, page);
@@ -37,7 +41,7 @@ const Category = () => {
 		<div>
 			<div className="container mx-auto flex flex-col gap-16 my-16">
 				<h1 className="text-center text-4xl text-white">Top {category} movies</h1>
-				<div className="flex flex-wrap gap-12 justify-center items-center">
+				<div className="flex flex-wrap gap-16 justify-center items-center">
 					{movies.map((movie, index) => (
 						<MovieComponent page={page} movie={movie} key={movie.id} index={index} />
 					))}
@@ -47,7 +51,9 @@ const Category = () => {
 			<Pagination page={page} getPage={handlePageChange} totalPages={totalPages} />
 		</div>
 	) : (
-		<Spinner size={'xl'} color="green.600" position={'absolute'} inset={'0'} m={'auto'} />
+		<div className="h-screen flex items-center justify-center">
+			<Spinner size={'xl'} color="green.600" mb={'40'} />
+		</div>
 	);
 };
 

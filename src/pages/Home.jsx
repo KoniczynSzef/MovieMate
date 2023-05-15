@@ -18,6 +18,10 @@ const Home = () => {
 	};
 
 	useEffect(() => {
+		window.scrollTo({ behavior: 'smooth', top: 0 });
+	}, []);
+
+	useEffect(() => {
 		const getTrendingMovies = async () => {
 			setIsLoading(true);
 			const [data, pages] = await fetchTrendingMovies(page);

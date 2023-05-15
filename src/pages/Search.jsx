@@ -24,6 +24,10 @@ const Search = () => {
 	};
 
 	useEffect(() => {
+		window.scrollTo({ behavior: 'smooth', top: 0 });
+	}, []);
+
+	useEffect(() => {
 		const fetchSearchedMovies = async () => {
 			setIsLoading(true);
 			setHasFetchedAnyData(true);

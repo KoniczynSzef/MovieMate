@@ -3,9 +3,14 @@ import { Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 
 const Serie = ({ singleSeries }) => {
 	const serie = singleSeries;
+
+	useEffect(() => {
+		window.scrollTo({ behavior: 'smooth', top: 0 });
+	}, []);
 
 	return serie.name ? (
 		<motion.div

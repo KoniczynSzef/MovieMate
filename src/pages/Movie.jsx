@@ -3,9 +3,14 @@ import { ArrowForwardIcon, StarIcon } from '@chakra-ui/icons';
 import { Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 
 const Movie = ({ singleMovie }) => {
 	const movie = singleMovie;
+
+	useEffect(() => {
+		window.scrollTo({ behavior: 'smooth', top: 0 });
+	}, []);
 
 	return movie.title ? (
 		<motion.div

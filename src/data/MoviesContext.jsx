@@ -13,6 +13,8 @@ export const MoviesContextProvider = ({ children }) => {
 	const [category, setCategory] = useState('');
 	const [person, setPerson] = useState({});
 
+	const [session, setSession] = useState('');
+
 	return (
 		<MoviesContext.Provider
 			value={{
@@ -28,6 +30,8 @@ export const MoviesContextProvider = ({ children }) => {
 				setCategory,
 				person,
 				setPerson,
+				session,
+				setSession,
 			}}>
 			{children}
 		</MoviesContext.Provider>

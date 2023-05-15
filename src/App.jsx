@@ -1,5 +1,5 @@
 // importing Hooks
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './App.css';
 
 // importing Context API
@@ -17,13 +17,16 @@ import Movie from './pages/Movie';
 import NotFound from './pages/NotFound';
 import Category from './pages/Category';
 import People from './pages/People';
-import Person from './pages/Person';
 import Serie from './pages/Serie';
 import Actor from './pages/Actor';
 
-function App() {
+const App = () => {
 	const { movies, query, singleMovie, singleSeries, category, person } =
 		useContext(MoviesContext);
+
+	useEffect(() => {
+		window.scrollTo({ behavior: 'smooth', top: 0 });
+	}, []);
 
 	return (
 		<div className="App bg-[#171717] min-h-screen">
@@ -48,6 +51,6 @@ function App() {
 			</div>
 		</div>
 	);
-}
+};
 
 export default App;
