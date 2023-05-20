@@ -5,11 +5,14 @@ import { motion } from 'framer-motion';
 import { useContext, useId } from 'react';
 import MoviesContext from '../data/MoviesContext';
 
-const MovieComponent = ({ movie, index }) => {
+const MovieComponent = ({ movie, index, category }) => {
 	const { setSingleMovie, setSingleSeries } = useContext(MoviesContext);
 	const id = useId();
 
-	const isNotAMovie = movie.media_type === 'tv' ? true : false;
+	let linkTo = 'series'
+	if(category) linkTo = 'movies'
+
+	if(movie.media_type === 'movie') linkTo = 'movies'
 
 	return (
 		movie.poster_path && (
@@ -20,10 +23,10 @@ const MovieComponent = ({ movie, index }) => {
 				animate={{ opacity: 1 }}
 				transition={{ duration: 0.25, delay: 0.1 * index }}>
 				<Link
-					to={`/${movie.media_type === 'tv' ? 'series' : 'movies'}/${movie.id}`}
+					to={`/${linkTo}/${movie.id}`}
 					className="link-wrapper flex flex-col justify-between h-full"
 					onClick={
-						isNotAMovie ? () => setSingleSeries(movie) : () => setSingleMovie(movie)
+						linkTo === 'series' ? () => setSingleSeries(movie) : () => setSingleMovie(movie)
 					}>
 					<Image
 						as={motion.img}
@@ -75,6 +78,7 @@ MovieComponent.propTypes = {
 	movie: PropTypes.any.isRequired,
 	index: PropTypes.number.isRequired,
 	page: PropTypes.number.isRequired,
+	category: PropTypes.string
 };
 
 export default MovieComponent;

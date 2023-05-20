@@ -52,11 +52,12 @@ const Home = () => {
 					</div>
 				</div>
 			)}
-
+			
 			<Pagination page={page} getPage={handlePageChange} totalPages={totalPages} />
 		</div>
 	) : (
-		<div className="h-screen flex items-center justify-center">
+		<div
+			className={`h-screen flex items-center justify-center`}>
 			<Spinner size={'xl'} color="green.600" mb={'40'} />
 		</div>
 	);

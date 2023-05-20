@@ -1,12 +1,15 @@
 import { PropTypes } from 'prop-types';
-import { ArrowForwardIcon, StarIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, StarIcon } from '@chakra-ui/icons';
 import { Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import MoviesContext from '../data/MoviesContext';
 
 const Movie = ({ singleMovie }) => {
 	const movie = singleMovie;
+
+	const { setQuery } = useContext(MoviesContext)
 
 	useEffect(() => {
 		window.scrollTo({ behavior: 'smooth', top: 0 });
@@ -28,12 +31,22 @@ const Movie = ({ singleMovie }) => {
 							</h5>
 							<div className="flex items-center gap-4">
 								<StarIcon boxSize={'10'} color={'yellow.400'} />
-								<div className="flex text-white text-3xl">
-									<h3 className="font-semibold">
-										{movie.vote_average.toFixed(1)}
-									</h3>
-									<span>/10</span>
-								</div>
+								{movie.vote_average !== 0 ? (
+									<div className="flex text-white text-3xl">
+										<h3 className="font-semibold">
+											{movie.vote_average.toFixed(1)}
+										</h3>
+										<span>/10</span>
+									</div>
+								) : (
+										<div className="flex text-white text-3xl">
+											<h3 className="font-semibold">
+												Movie not rated yet.
+											</h3>
+										</div>
+									)
+								}
+								
 							</div>
 						</div>
 					</div>
@@ -50,7 +63,7 @@ const Movie = ({ singleMovie }) => {
 								alt=""
 								className="ml-auto"
 							/>
-							<p className="text-white text-2xl leading-10 text-center md:text-right">
+							<p className="text-white text-2xl leading-10 text-center border-2 border-slate-400 bg-[#272727] p-6 rounded-xl">
 								{movie.overview}
 							</p>
 						</div>
@@ -63,7 +76,7 @@ const Movie = ({ singleMovie }) => {
 						colorScheme="green"
 						fontSize={'xl'}
 						p={'6'}
-						rightIcon={<ArrowForwardIcon />}>
+						leftIcon={<ArrowBackIcon />} onClick={() => setQuery('')}>
 						Go to home page
 					</Button>
 				</Link>

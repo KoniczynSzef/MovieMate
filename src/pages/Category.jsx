@@ -43,7 +43,7 @@ const Category = () => {
 				<h1 className="text-center text-4xl text-white">Top {category} movies</h1>
 				<div className="flex flex-wrap gap-16 justify-center items-center">
 					{movies.map((movie, index) => (
-						<MovieComponent page={page} movie={movie} key={movie.id} index={index} />
+						<MovieComponent page={page} movie={movie} key={movie.id} index={index} category={'movies'} />
 					))}
 				</div>
 			</div>

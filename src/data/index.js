@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { GENRE_NAMES, GENRES } from './assets';
 
-const apiKey = import.meta.env.VITE_KEY;
-console.log(apiKey);
-
 const randomizeData = (data) => {
 	for (let i = data.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));

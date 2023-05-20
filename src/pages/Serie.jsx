@@ -1,12 +1,15 @@
-import { ArrowForwardIcon, StarIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, StarIcon } from '@chakra-ui/icons';
 import { Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { motion } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import MoviesContext from './../data/MoviesContext';
 
 const Serie = ({ singleSeries }) => {
 	const serie = singleSeries;
+
+	const { setQuery } = useContext(MoviesContext)
 
 	useEffect(() => {
 		window.scrollTo({ behavior: 'smooth', top: 0 });
@@ -50,20 +53,24 @@ const Serie = ({ singleSeries }) => {
 								alt=""
 								className="ml-auto"
 							/>
-							<p className="text-white text-2xl leading-10 text-right">
+							<p className="text-white text-2xl leading-10 text-center border-2 border-slate-400 bg-[#272727] p-6 rounded-xl">
 								{serie.overview}
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className="absolute left-0 bottom-12 flex justify-center w-full">
+			<Box w={'full'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
 				<Link to={'/'}>
-					<Button colorScheme="green" fontSize={'xl'} rightIcon={<ArrowForwardIcon />}>
+					<Button
+						colorScheme="green"
+						fontSize={'xl'}
+						p={'6'}
+						leftIcon={<ArrowBackIcon />} onClick={() => setQuery('')}>
 						Go to home page
 					</Button>
 				</Link>
-			</div>
+			</Box>
 		</motion.div>
 	) : (
 		<Box
