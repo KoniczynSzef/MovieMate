@@ -24,3 +24,19 @@ git clone https://github.com/KoniczynSzef/MovieMate.git
 ```bash
 npm run dev
 ```
+___
+
+## Tools, libraries used to build *MovieMate*
+1. [React JS](https://react.dev/ "React dev official website") - used for providing dynamic interface
+2. [Vite](https://vitejs.dev/ "Vite official website") - used for creating an enviroment and basic setup for the project
+3. [The Movie Database API](https://www.themoviedb.org/ "The Movie Database") - used as an external API, from which application gets all movies and so on
+4. [Axios](https://axios-http.com/ "Axios official website") - used for fetching data in much simpler way than built-in ```fetch()``` function
+5. [TailwindCSS](https://tailwindcss.com/ "TailwindCSS official website") - used for building complex interfaces much easier and quicker than simple CSS
+6. [Chakra UI](https://chakra-ui.com/ "Chakra UI official website") - used for building components such as Pagination or Sidebar
+7. [React Router](https://reactrouter.com/en/main "React Router official website") - used for providing many pages on site and dynamically display adequate component to the URL address
+8. [Framer Motion](https://www.framer.com/motion/ "Framer Motion official website") - used for complex animations such as when Sidebar is open
+
+___
+
+## © 2023 | Build By
+# KoniczynSzef
