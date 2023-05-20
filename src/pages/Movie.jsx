@@ -3,13 +3,10 @@ import { ArrowBackIcon, StarIcon } from '@chakra-ui/icons';
 import { Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useContext, useEffect } from 'react';
-import MoviesContext from '../data/MoviesContext';
+import { useEffect } from 'react';
 
 const Movie = ({ singleMovie }) => {
 	const movie = singleMovie;
-
-	const { setQuery } = useContext(MoviesContext)
 
 	useEffect(() => {
 		window.scrollTo({ behavior: 'smooth', top: 0 });
@@ -51,13 +48,13 @@ const Movie = ({ singleMovie }) => {
 						</div>
 					</div>
 					<h5 className="text-white text-xl">{movie.release_date.slice(0, 4)}</h5>
-					<div className="flex gap-12 flex-col md:flex-row">
+					<div className="flex gap-12 flex-col lg:flex-row">
 						<img
 							src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 							alt=""
 							className="rounded-md md:max-w-[24rem]"
 						/>
-						<div className="ml-auto md:max-w-[50%] flex flex-col gap-12 md:gap-0 justify-between">
+						<div className="ml-auto flex flex-col gap-12 justify-between">
 							<img
 								src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
 								alt=""
@@ -70,17 +67,20 @@ const Movie = ({ singleMovie }) => {
 					</div>
 				</div>
 			</div>
-			<Box w={'full'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-				<Link to={'/'}>
-					<Button
-						colorScheme="green"
-						fontSize={'xl'}
-						p={'6'}
-						leftIcon={<ArrowBackIcon />} onClick={() => setQuery('')}>
-						Go to home page
-					</Button>
-				</Link>
-			</Box>
+			<div className="container mx-auto p-4">
+				<Box w={'full'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+					<Link to={'/'} className='ml-auto'>
+						<Button
+							colorScheme="green"						
+							fontSize={'xl'}
+							p={'6'}
+							leftIcon={<ArrowBackIcon />} onClick={() => document.querySelector('#search-bar').value = ''}>
+							Go to home page
+						</Button>
+					</Link>
+				</Box>
+			</div>
+			
 		</motion.div>
 	) : (
 		<Box

@@ -62,17 +62,19 @@ const Actor = ({ person }) => {
 					</div>
 				</div>
 			</div>
-			<Box w={'full'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-				<Link to={'/'} className="mb-4">
-					<Button
-						colorScheme="green"
-						fontSize={'xl'}
-						p={'6'}
-						leftIcon={<ArrowBackIcon />}>
-						Go to home page
-					</Button>
-				</Link>
-			</Box>
+			<div className="container mx-auto p-4">
+				<Box w={'full'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+					<Link to={'/'} className='ml-auto'>
+						<Button
+							colorScheme="green"						
+							fontSize={'xl'}
+							p={'6'}
+							leftIcon={<ArrowBackIcon />} onClick={() => document.querySelector('#search-bar').value = ''}>
+							Go to home page
+						</Button>
+					</Link>
+				</Box>
+			</div>
 		</motion.div>
 	) : (
 		<Box

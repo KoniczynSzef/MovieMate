@@ -18,22 +18,26 @@ const MovieComponent = ({ movie, index, category }) => {
 		movie.poster_path && (
 			<motion.div
 				key={id}
-				className="card h-[28rem] w-[15rem] relative rounded-md border-2 border-slate-400 hover:scale-[1.05] transition duration-300 overflow-hidden hover:bg-[#272727]"
+				className="card h-[28rem] w-[15rem] relative rounded-md hover:scale-[1.05] transition duration-300 hover:bg-[#272727]"
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ duration: 0.25, delay: 0.1 * index }}>
 				<Link
+				role='link'
 					to={`/${linkTo}/${movie.id}`}
-					className="link-wrapper flex flex-col justify-between h-full"
+					className="link-wrapper flex flex-col justify-between h-full border-2 border-slate-400 outline-none outline-offset-4 focus:outline-2 focus:outline-slate-400 focus:rounded-md transition-all duration-300"
 					onClick={
-						linkTo === 'series' ? () => setSingleSeries(movie) : () => setSingleMovie(movie)
-					}>
+						linkTo === 'series' ? () => setSingleSeries(movie) : () => setSingleMovie(movie) 
+					}
+					title={movie.title || movie.name}
+					>
 					<Image
 						as={motion.img}
 						src={
 							movie.poster_path &&
 							`https://image.tmdb.org/t/p/w500${movie.poster_path}`
 						}
+						alt={movie.title || movie.name}
 						w={'full'}
 						outlineOffset={'2px'}
 						_focusVisible={{ outline: '2px solid #272727' }}

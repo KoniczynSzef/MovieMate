@@ -12,6 +12,7 @@ const Pagination = ({ page, getPage, totalPages }) => {
 		<Container mx={'auto'} maxW={{ base: 'container.md', md: 'full' }} bg={'#272727'}>
 			<HStack w={'full'} justifyContent={'center'} spacing={'8'} py={'8'}>
 				<Button
+					role='button'
 					isDisabled={page === 1 && true}
 					leftIcon={<ArrowBackIcon />}
 					colorScheme="red"
@@ -20,6 +21,7 @@ const Pagination = ({ page, getPage, totalPages }) => {
 				</Button>
 				<HStack spacing={'2'}>
 					<Button
+						role='button'
 						isDisabled={page === 1 && true}
 						hidden={isSmallerThanMd ? true : false}
 						key={1}
@@ -30,6 +32,7 @@ const Pagination = ({ page, getPage, totalPages }) => {
 					</Button>
 					{pages.map((pageNum) => (
 						<Button
+							role='button'
 							hidden={isSmallerThanMd ? true : false}
 							isDisabled={pageNum > totalPages || pageNum === page ? true : false}
 							key={pageNum}
@@ -41,6 +44,7 @@ const Pagination = ({ page, getPage, totalPages }) => {
 						</Button>
 					))}
 					<Button
+						role='button'
 						isDisabled={page === totalPages && true}
 						hidden={isSmallerThanMd ? true : false}
 						key={totalPages}
@@ -51,6 +55,7 @@ const Pagination = ({ page, getPage, totalPages }) => {
 					</Button>
 				</HStack>
 				<Button
+					role='button'
 					isDisabled={page === totalPages && true}
 					colorScheme="green"
 					rightIcon={<ArrowForwardIcon />}

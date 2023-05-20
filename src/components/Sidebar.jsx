@@ -43,6 +43,7 @@ const Sidebar = () => {
 	return (
 		<>
 			<Button
+				role='button'
 				ref={btnRef}
 				color={'white'}
 				_hover={{ bg: '#272727' }}
@@ -59,7 +60,8 @@ const Sidebar = () => {
 				size="xs">
 				<DrawerOverlay />
 				<DrawerContent bg={'#070707'} position={'relative'} h={'100vh'} overflowY={'auto'}>
-					<DrawerCloseButton
+					<DrawerCloseButton					
+						role='button'
 						color={'red'}
 						size={'lg'}
 						position={'absolute'}
@@ -101,6 +103,7 @@ const Sidebar = () => {
 										x: -100,
 										filter: 'blur(5px)',
 									}}
+									role='link'
 									animate={{ x: 0, filter: 'blur(0)' }}
 									transition={{ duration: 0.25, delay: 0.1 * index }}
 									key={index}

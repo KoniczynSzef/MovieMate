@@ -10,10 +10,12 @@ const LinkNavbar = ({ link, idx, getTypeOfMovie, onClose, isSidebar }) => {
 	return (
 		<li key={idx}>
 			<NavLink
+				role='link'
 				tabIndex={idx + 2}
 				onClick={!isSidebar ? handleClick : onClose}
 				to={`/${link}`}
-				className={`px-5 py-2 rounded-sm hover:bg-[#272727] text-white text-base lg:text-2xl capitalize font-semibold transition duration-300`}>
+				className={`px-5 py-2 rounded-sm text-white text-base lg:text-2xl
+				capitalize font-semibold transition-all duration-300 hover:bg-[#272727] outline-none focus:outline focus:outline-slate-400 focus:bg-[#474747]`}>
 				{link}
 			</NavLink>
 		</li>

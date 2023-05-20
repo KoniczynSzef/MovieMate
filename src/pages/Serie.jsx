@@ -3,13 +3,10 @@ import { Box, Button, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { motion } from 'framer-motion';
-import { useEffect, useContext } from 'react';
-import MoviesContext from './../data/MoviesContext';
+import { useEffect } from 'react';
 
 const Serie = ({ singleSeries }) => {
 	const serie = singleSeries;
-
-	const { setQuery } = useContext(MoviesContext)
 
 	useEffect(() => {
 		window.scrollTo({ behavior: 'smooth', top: 0 });
@@ -47,7 +44,7 @@ const Serie = ({ singleSeries }) => {
 							alt=""
 							className="rounded-md max-w-[24rem]"
 						/>
-						<div className="ml-auto max-w-[50%] flex flex-col justify-between">
+						<div className="ml-auto flex flex-col gap-12 justify-between">
 							<img
 								src={`https://image.tmdb.org/t/p/w500${serie.backdrop_path}`}
 								alt=""
@@ -60,17 +57,19 @@ const Serie = ({ singleSeries }) => {
 					</div>
 				</div>
 			</div>
-			<Box w={'full'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
-				<Link to={'/'}>
-					<Button
-						colorScheme="green"
-						fontSize={'xl'}
-						p={'6'}
-						leftIcon={<ArrowBackIcon />} onClick={() => setQuery('')}>
-						Go to home page
-					</Button>
-				</Link>
-			</Box>
+			<div className="container mx-auto p-4">
+				<Box w={'full'} display={'flex'} alignItems={'center'} justifyContent={'center'}>
+					<Link to={'/'} className='ml-auto'>
+						<Button
+							colorScheme="green"						
+							fontSize={'xl'}
+							p={'6'}
+							leftIcon={<ArrowBackIcon />} onClick={() => document.querySelector('#search-bar').value = ''}>
+							Go to home page
+						</Button>
+					</Link>
+				</Box>
+			</div>
 		</motion.div>
 	) : (
 		<Box

@@ -3,7 +3,6 @@ import { useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
-import logo from '../assets/vite.svg';
 import koniczyneczka from '../assets/logo.png';
 import { LINKS } from '../data/assets';
 import './Navbar.css';
@@ -17,10 +16,11 @@ import LinkNavbar from './LinkNavbar';
 
 const Navbar = () => {
 	const navigate = useNavigate();
-
 	const input = useRef();
 
 	const { setMovies, setQuery } = useContext(MoviesContext);
+
+	const [typing, setTyping] = useState(false)
 
 	const getData = async () => {
 		const q = input.current.value;
@@ -45,7 +45,8 @@ const Navbar = () => {
 				<Link
 					tabIndex={1}
 					to={'/'}
-					className="logo transition duration-200 ml-2"
+					role='link'
+					className="logo transition-all duration-200 ml-2 outline-none rounded focus:outline-2 focus:outline-slate-400"
 					title="MovieMate"
 					onClick={() => {
 						input.current.value = '';
@@ -73,10 +74,15 @@ const Navbar = () => {
 								navigate('/search');
 								getData();
 							}}>
+								<label htmlFor="search-bar"></label>
 							<input
+								onFocus={() => setTyping(true)} onBlur={() => setTyping(false)}
+								name='search-bar'
+								id='search-bar'
 								type="search"
 								placeholder="Search on MovieMate..."
-								className="px-3 border border-solid bg-[#070707] border-gray-700 py-2 text-gray-200 rounded-md outline-none"
+								className={`px-3 ${typing ? `px-5 outline-2 outline-gray-700` : `px-3 outline-none`} border border-solid bg-[#070707]
+								border-gray-700 py-2 text-gray-200 transition-all duration-200 rounded-md outline-none outline-offset-4`}
 								ref={input}
 							/>
 						</form>
