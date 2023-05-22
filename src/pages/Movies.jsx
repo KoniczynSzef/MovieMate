@@ -41,10 +41,10 @@ const Movies = ({ movies }) => {
 	}, [page, setMovies]);
 
 	return !isLoading && movies.length >= 1 ? (
-		<div className="min-h-screen flex flex-col justify-between">
+		<div className="flex min-h-screen flex-col justify-between">
 			<div className="container mx-auto my-16 mt-32 flex flex-col gap-32 px-2">
 				<h1 className="text-center text-4xl text-white"> Top rated movies, page {page}</h1>
-				<div className="flex flex-wrap justify-center items-center gap-16">
+				<div className="flex flex-wrap items-center justify-center gap-16">
 					{movies.map((movie, index) =>
 						movie.id !== undefined ? (
 							<MovieComponent
@@ -52,6 +52,7 @@ const Movies = ({ movies }) => {
 								movie={movie}
 								key={movie.id}
 								index={index}
+								movieType={'movies'}
 							/>
 						) : (
 							<MotionText
@@ -75,7 +76,7 @@ const Movies = ({ movies }) => {
 			<Pagination page={page} getPage={handlePageChange} totalPages={totalPages} />
 		</div>
 	) : (
-		<div className="h-screen flex items-center justify-center">
+		<div className="flex h-screen items-center justify-center">
 			<Spinner size={'xl'} color="green.600" mb={'40'} />
 		</div>
 	);

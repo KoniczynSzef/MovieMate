@@ -5,32 +5,33 @@ import { motion } from 'framer-motion';
 import { useContext, useId } from 'react';
 import MoviesContext from '../data/MoviesContext';
 
-const MovieComponent = ({ movie, index, category }) => {
+const MovieComponent = ({ movie, index, category, movieType }) => {
 	const { setSingleMovie, setSingleSeries } = useContext(MoviesContext);
 	const id = useId();
 
-	let linkTo = 'series'
-	if(category) linkTo = 'movies'
-
-	if(movie.media_type === 'movie') linkTo = 'movies'
+	let linkTo = 'series';
+	if (category) linkTo = 'movies';
+	if (movieType === 'movies') linkTo = 'movies';
+	if (movie.media_type === 'movie') linkTo = 'movies';
 
 	return (
 		movie.poster_path && (
 			<motion.div
 				key={id}
-				className="card h-[28rem] w-[15rem] relative rounded-md hover:scale-[1.05] transition duration-300 hover:bg-[#272727]"
+				className="card relative h-[28rem] w-[15rem] rounded-md transition duration-300 hover:scale-[1.05] hover:bg-[#272727]"
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ duration: 0.25, delay: 0.1 * index }}>
 				<Link
-				role='link'
+					role="link"
 					to={`/${linkTo}/${movie.id}`}
-					className="link-wrapper flex flex-col justify-between h-full border-2 border-slate-400 outline-none outline-offset-4 focus:outline-2 focus:outline-slate-400 focus:rounded-md transition-all duration-300"
+					className="link-wrapper flex h-full flex-col justify-between border-2 border-slate-400 outline-none outline-offset-4 transition-all duration-300 focus:rounded-md focus:outline-2 focus:outline-slate-400"
 					onClick={
-						linkTo === 'series' ? () => setSingleSeries(movie) : () => setSingleMovie(movie) 
+						linkTo === 'series'
+							? () => setSingleSeries(movie)
+							: () => setSingleMovie(movie)
 					}
-					title={movie.title || movie.name}
-					>
+					title={movie.title || movie.name}>
 					<Image
 						as={motion.img}
 						src={
@@ -82,7 +83,8 @@ MovieComponent.propTypes = {
 	movie: PropTypes.any.isRequired,
 	index: PropTypes.number.isRequired,
 	page: PropTypes.number.isRequired,
-	category: PropTypes.string
+	category: PropTypes.string,
+	movieType: PropTypes.string,
 };
 
 export default MovieComponent;
